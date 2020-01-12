@@ -1,0 +1,91 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/index/index",
+    "pages/user/index",
+    "pages/myTrade/index",
+    "pages/myComment/index",
+    "pages/citylist/index",
+    "pages/orderlist/index",
+    "pages/orderDetail/index",
+    "pages/payOrder/index",
+    "pages/logs/logs",
+    "pages/comment/index",
+    "pages/commentList/index",
+    "pages/juzihl/index",
+    "pages/niceShop/index",
+    "pages/comDetail/index",
+    "pages/juzi/index",
+    "pages/merchantsCanUse/index",
+    "pages/pay/index",
+    "pages/payrecord/index",
+    "pages/cardlist/index",
+    "pages/payresult/index",
+    "pages/jujiGarden/userInfor/userInfor",
+    "pages/jujiGarden/gardenIndex/index",
+    "pages/jujiGarden/myUser/index",
+    "pages/jujiGarden/withdrawRecord/index",
+    "pages/jujiGarden/withdrawDetail/index",
+    "pages/jujiGarden/incomeData/index",
+    "pages/jujiGarden/recommend/index",
+    "pages/jujiGarden/recommendnew/index",
+    "pages/jujiGarden/orderDetail/orderDetail",
+    "pages/map/index",
+    "pages/myCards/index",
+    "pages/myRecord/index",
+    "pages/activities/project-list/index",
+    "pages/activities/splicedDetail/index",
+    "pages/activities/bargainDetail/index",
+    "pages/activities/secondlist/index",
+    "pages/activities/secondDetail/index",
+    "pages/activities/myActivity/index",
+    "pages/activities/my-collage/index",
+    "pages/payDetail/index",
+    "pages/mypayDetail/index"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "桔 集",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#333333",
+    "borderStyle": "white",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/mall.png",
+        "selectedIconPath": "images/mall_selected.png"
+      },
+      {
+        "text": "桔园",
+        "pagePath": "pages/jujiGarden/gardenIndex/index",
+        "iconPath": "images/juyuan.png",
+        "selectedIconPath": "images/juyuan-select.png"
+      },
+      {
+        "text": "桔子",
+        "pagePath": "pages/juzi/index",
+        "iconPath": "images/juzi.png",
+        "selectedIconPath": "images/juzi_selected.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/user/index",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/my_selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

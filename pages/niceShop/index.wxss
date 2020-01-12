@@ -1,0 +1,37 @@
+page{height:100%;background-color:#fff;}
+.main{background:#fff;padding:40rpx 30rpx 30rpx;}
+.nodataDiv{padding-top: 260rpx;height: 900rpx;}
+
+.jingxuanlist{box-shadow:0 5px 5px 3px rgba(229,229,229,0.50);border-radius:10rpx;margin-top:30rpx;position: relative;padding-bottom: 30rpx;}
+.jingxuanlist .productImg{width:100%;height:340rpx;border-top-left-radius:10rpx;border-top-right-radius:10rpx;}
+.dis-wrap{display:flex;align-items:center;margin-top:10rpx;padding:0 20rpx;}
+.from{font-size:22rpx;color:#999;}
+.dis{font-size:22rpx;color:#999;}
+.pro-name{font-size:24rpx;color:#333;margin-top:15rpx;display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical;padding:0 20rpx;}
+.price-wrap{display:flex;align-items:center;margin-top:12rpx;padding:0 20rpx;line-height: 38rpx;}
+.p-wrap{display:flex;align-items:flex-end;}
+.now-price{font-size:38rpx;line-height:38rpx;color:#e83221;font-weight:bold;}
+.now-text{font-size:24rpx;line-height:24rpx;color:#e83221;font-weight:bold;margin-bottom: 3rpx;}
+.old-price{font-size:22rpx;color:#999;text-decoration:line-through;}
+.count{font-size:24rpx;color:#999;margin-left:10rpx;}
+
+.proDiv{margin-left: 16rpx;border-radius: 6rpx;overflow: hidden;}
+.proDiv .l{padding: 3rpx 10rpx;background: #444444;font-size: 20rpx;color: #FED901;}
+.proDiv .r{padding: 3rpx 10rpx;font-size: 20rpx;color: #000000;background-image: linear-gradient(-269deg, #FCBF0A 0%, #FFDC00 100%);font-weight: bold;}
+.ctrlbtn{width:106rpx;height:50rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;}
+.buyBtn2{border:2rpx solid #E83221;border-radius:6rpx;color:#E83221;background:#fff;}
+.sharBtn{width: 80rpx;height: 60rpx;}
+.sharePng{width: 37rpx;height: 40rpx;display: block;}
+.buyBtn1,.proBtn1{background: #E83221;border-radius:6rpx;color:#ffffff;margin-left: 20rpx;}
+
+.mark1,.mark2,.mark3{width: 96rpx;height: 34rpx;text-align: center;line-height: 34rpx;border-radius: 17rpx;display: inline-block;font-size: 20rpx;margin-left: 12rpx}
+.mark1{background-color:rgba(37,184,188,0.2);color: #25B8BC;}
+.mark2{background-color:rgba(247,95,96,0.2);color: #F75E60;}
+.mark3{background-color:rgba(254,119,66,0.2);color: #FE7742;}
+
+.icon_mark{display: block;margin-left: 8rpx;height: 32rpx;width: 48rpx;}
+.shareB{position: absolute;bottom: 30rpx;right: 30rpx;width: 80rpx; height: 40rpx;display:flex;align-items:center;-webkit-justify-content: flex-end;background-color: #fff;border: 0;}
+.shareImg{display: block;width: 35rpx;height: 38rpx;}
+.mtitle{font-size:40rpx;color:#333;font-weight:bold;}
+.subtitle{font-size:24rpx;color:#999;margin-top:10rpx;}
+.mt08{margin-top: 16rpx;}

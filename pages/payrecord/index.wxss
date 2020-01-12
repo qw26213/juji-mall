@@ -1,0 +1,74 @@
+.recordlist {
+  z-index: 999999;
+  padding: 0 30rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.main_record .item .chong {
+  color: #6a3c12;
+}
+
+.main_record .item {
+  padding: 30rpx 0;
+  position: relative;
+}
+.border::after{
+  content: '';
+  position: absolute;  /* 把父视图设置为relative，方便定位*/
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #f6f6f6;
+}
+
+.main_record .item .tit {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.main_record .item .date {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+
+.main_record .item .amount {
+  color: #333;
+  font-size: 32rpx;
+}
+
+.shuiyin {
+  width:100%;
+  padding: 50rpx 0;
+}
+.ab{
+  position: absolute;
+  bottom: 0rpx;
+  left: 0;
+  right: 0;
+}
+.shuiyin image{
+  width:120rpx;
+  height:40rpx;
+  margin:0 auto;
+  display: block;
+}
+.money,.money .syb{
+  font-size: 28rpx;
+  color: #333;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.type{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  margin-top: 16rpx;
+}

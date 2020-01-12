@@ -1,0 +1,8 @@
+<view class="modal" hidden="{{isShow}}">
+    <view class="registerBox">
+        <image class="icon_close" src="../../images/icon_close.png" bindtap="closeModal"></image>
+        <image class="logo" src="../../images/logo.png"></image>
+        <text class="logoTxt">享拼拼</text>
+        <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="registerBtn">使用微信快速登录</button>
+    </view>
+</view>

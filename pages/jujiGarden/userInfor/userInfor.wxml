@@ -1,0 +1,15 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class='page'>
+  <view class='list-box'>
+    <view class='list' wx:for='{{userListInfor}}' wx:key="item">
+        <view class="item ub">
+            <image class="userImg udb" src="{{ item.avatar? item.avatar : userHeadUrl }}"></image>
+            <view class="ub-f1" style="position:realtive">
+                <view class="name">{{item.nickName}}</view>
+                <view class="remark">接受邀请时间：{{item.joinedDate}}</view>
+                <view class="income">已邀桔民{{item.invitedMemberCount}}人，还差{{item.lackMemberCount}}人成为桔长</view>
+            </view>
+        </view>
+    </view>
+  </view>
+</view> 

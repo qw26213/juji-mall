@@ -1,0 +1,42 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="fullScreen ub ub-ver">
+    <view class="tablist">
+        <view class="tablist ub ub-ac ub-pj1">
+            <view wx:for="{{tablist}}" wx:key="unique" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-index="{{index}}">
+                {{item}}<view class="line"></view>
+            </view>
+        </view>
+    </view>
+    <view class="main ub-f1">
+        <view class="conDiv" hidden="{{curTabIndex!=0}}">
+            <view class="udb" wx:if="{{!isShowNodata1}}">
+                <view class="item ub ub-ac" wx:for="{{inputlist}}" wx:key="unique">
+                    <view class="ub-f1">
+                        <view class="name">{{item.recordTypeName}}</view>
+                        <view class="time">{{item.time}}</view>
+                    </view>
+                    <view class="ub ub-ac ub-pj amount">+{{item.num}}</view>
+                </view>
+            </view>
+            <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>
+                <image class="nodataImg" mode="widthFix" src="../../images/null3.png"></image>
+                <view class="nodataTxt">你还没有收入哦~</view>
+            </view>
+        </view>
+        <view class="conDiv" hidden="{{curTabIndex!=1}}">
+            <view class="udb" wx:if="{{!isShowNodata2}}">
+                <view class="item ub ub-ac" wx:for="{{inputlist}}" wx:key="unique">
+                    <view class="ub-f1">
+                        <view class="name">{{item.recordTypeName}}</view>
+                        <view class="time">{{item.time}}</view>
+                    </view>
+                    <view class="ub ub-ac ub-pj amount">{{item.num}}</view>
+                </view>
+            </view>
+            <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>
+                <image class="nodataImg" mode="widthFix" src="../../images/null3.png"></image>
+                <view class="nodataTxt">你还没有支出哦~</view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,18 @@
+page{height: 100%}
+.tablist{height: 100rpx;background-color: #fff}
+.tablist .tabItem{position: relative;font-size: 28rpx;color: #666;padding:0 40rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
+.tablist .tabItem .line{width:50rpx;height: 4rpx;background-color: #FFDC00;border-radius: 2rpx;position:absolute;bottom: 20rpx;left: 50%;margin-left: -25rpx;display: none;}
+.tablist .tabItem.on{color:#333;}
+.tablist .tabItem.on .line{display: block;}
+
+.main{padding: 30rpx;}
+.ml10{margin-left: 20rpx;}
+.tit{line-height: 64rpx;font-size: 28rpx;color: #333;}
+.item{ padding: 30rpx 30rpx;background-color: #fff;border-radius: 10rpx;margin-bottom: 30rpx;}
+.name {font-size: 28rpx;color: #333 }
+.address{margin-top: 30rpx;}
+.phone{margin-top: 16rpx;}
+.icon1{width:24rpx;height:29rpx;margin-right: 15rpx;display: block;margin-top: 10rpx;}
+.icon2{width:26rpx;height:22rpx;margin-right: 15rpx;display: block;margin-top: 12rpx;}
+.txt{color: #333;font-size:28rpx;line-height: 47rpx;}
+.conDiv{height: 100%;box-sizing:border-box;}

@@ -1,0 +1,34 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="main_record">
+  <view class="recordlist">
+    <view class="item" wx:for="{{recordList}}" wx:key="{{index}}" bindtap="toPayDetail" data-id="{{item.id}}">
+
+      <view style="width:100%;height:100%;" class="ub ub-ac">
+        <view class="ub-f1">
+          <view class="tit">{{item.storeName}}</view>
+          <view class="date">{{item.dateCreated}}</view>
+        </view>
+        <view class="amount chong ub ub-ac">
+          <view class="ub-f1">
+            <view class="money">
+              <view class="syb" wx:if="{{filter.toNum(item.money)>0}}">+</view>
+              {{item.money}}元
+            </view>
+            <view class="type">{{item.type}}</view>
+          </view>
+          <image src="../../images/arrow-right.png" style="width:14rpx;height: 28rpx;margin-left: 20rpx;"></image>
+        </view>
+      </view>
+
+      <view class="border"></view>
+
+    </view>
+  </view>
+
+  <view class="shuiyin {{recordList.length>0?'':'ab'}}">
+    <image src="../../images/juji.png" alt=""></image>
+  </view>
+
+
+</view>

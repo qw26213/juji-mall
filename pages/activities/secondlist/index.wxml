@@ -1,0 +1,67 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+ <view class="main">
+  <view class="toper">
+    <view class="mtitle">限时秒杀</view>
+    <view class="subtitle">限时秒杀，手慢无！</view>
+    <div class="tabs">
+      <view class="item l ub ub-ac ub-pc {{curIndex==1?'on':''}}" bindtap="activeTab" data-index="1">正在秒杀</view>
+      <view class="item r ub ub-ac ub-pc {{curIndex==2?'on':''}}" bindtap="activeTab" data-index="2">即将开始</view>
+    </div>
+  </view>
+  <!-- 正在秒杀 -->
+  <view wx:if="{{curIndex==1}}" class="productItem" wx:for='{{productList1}}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" data-status="{{item.activityStatus}}" catchtap='toDetail'>
+    <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
+    <view class="yqgMark" wx:if="{{item.balanceStock==0}}"><image src="/images/yqg.png"></image></view>
+    <view class="time ub ub-ac plr15">
+      <view class="b ub ub-pj ub-f1">
+          <view class="left" style="width:{{item.progressNum}}%">已抢{{item.activityStock - item.balanceStock}}件</view>
+          <view class="number" wx:if="{{item.progressNum<=80}}">{{item.progressNum}}%</view>
+      </view>
+      <view class="restTime ub ub-ac ub-pc">
+          <view class="txt">剩余</view>
+          <child curTime="{{item.timestamp}}" dataFromParent='{{item.expectGmtEnd}}' customeClass="block" bind:action="getData"></child>
+      </view>
+    </view>  
+
+    <view class="pro-name">{{item.productName}}</view>
+    <view class="price-wrap ub ub-ac jc-sb">
+      <view class="p-wrap ub ub-ac ub-f1">
+        <view class="now-price" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}桔子</view>
+        <view class="now-price" style="margin-bottom:5rpx;" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
+        <view class="now-price" wx:if="{{item.activityPrice>0}}">{{format.toFix(item.activityPrice)}}元</view>
+        <view class="old-price">{{format.toFix(item.originalPrice)}}元</view>
+      </view>
+      <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock>0}}" class="ctrlbtn ctrlbtn0">抢购</button>
+      <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock==0}}" class="ctrlbtn ctrlbtn2">已抢光</button>
+    </view>
+  </view>
+  <!-- 即将开始 -->
+  <view wx:if="{{curIndex==2}}" class="productItem" wx:for='{{productList2}}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" data-status="{{item.activityStatus}}" catchtap='toDetail'>
+    <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
+    <view class="time ub ub-ac plr15">
+      <view class="restTime1 ub ub-ac ub-f1">
+          <view class="txt">距开始还有</view>
+          <child curTime="{{item.timestamp}}" dataFromParent='{{item.expectGmtStart}}' customeClass="red" bind:action="getData"></child>
+      </view>
+      <view class="right ub ub-ac ub-pc">{{item.totalRemindNum}}人已设置提醒</view>
+    </view>  
+
+    <view class="pro-name">{{item.productName}}</view>
+    <view class="price-wrap ub ub-ac jc-sb">
+      <view class="p-wrap ub ub-ac ub-f1">
+        <view class="now-price" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}桔子</view>
+        <view class="now-price" style="margin-bottom:5rpx" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
+        <view class="now-price" wx:if="{{item.activityPrice>0}}">{{format.toFix(item.activityPrice)}}元</view>
+        <view class="old-price">{{format.toFix(item.originalPrice)}}元</view>
+      </view>
+      <button wx:if="{{item.activityStatus=='READY'&&!item.remind}}" class="ctrlbtn ctrlbtn1 ub ub-ac ub-pc" style="font-size:26rpx;width:150rpx;"><image class="clock1" src="/images/clock1.png"></image>提醒我</button>
+      <button wx:if="{{item.activityStatus=='ENDED'}}" class="ctrlbtn ctrlbtn2">已结束</button>
+      <button wx:if="{{item.activityStatus=='READY'&&item.remind}}" class="ctrlbtn ctrlbtn3">已设置提醒</button>
+    </view>
+  </view>
+  <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
+      <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
+      <view class="nodataTxt">暂无相关的秒杀商品</view>
+  </view>
+</view>

@@ -1,0 +1,37 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="merchantInfo">
+    <view class="merchantDiv ub ub-ac">
+        <image src="{{constant.basePicUrl}}{{productInfo.picId}}{{constant.basePicFix1}}" class="merchantImg"></image>
+        <view class="txt">{{productInfo.productName}}</view>
+    </view>
+</view>
+<view class="ub ub-ac pingDiv plr15">
+    <view class="tit ub-f1">整体评价</view>
+    <view class="ub ub-ac">
+        <image wx:for="{{pinglist1}}" wx:key="unique" class="icon_ping" bindtap="clickPing1" data-index="{{index}}" src="../../images/icon_ped.png"></image>
+        <image wx:for="{{pinglist2}}" wx:key="unique" class="icon_ping" bindtap="clickPing2" data-index="{{index}}" src="../../images/icon_ping.png"></image>
+    </view>
+</view>
+<view class="h20"></view>
+<view class="replyBox">
+    <view class="replyInfo">
+        <textarea class="replyDiv" auto-height placeholder="10字评价奖励10个桔子，带图评价可再得10个桔子哦～" bindinput="dataChange" placeholder-style=""></textarea>
+        <view class="ub ub-ac uploadImglist">
+            <view class="uploadImg" wx:for="{{imglist}}" wx:key="unique">
+                <image src="{{item}}" bindtap="preReadImg" data-src="{{item}}"></image>
+                <image class="ion_del" src="../../images/ion_del.png" data-index="{{index}}" bindtap="delThisImg"></image>
+            </view>
+            <view class="uploadImg" bindtap="openActionSheet">
+                <image src="../../images/uploadbtn.png"></image>
+                <view class="tx-c">添加照片</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="mt60 plr15">
+    <button class="btn_common" bindtap="submit" disabled="{{isDisbaled}}">确认发布</button>
+</view>
+
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{..._toast_ }}" />

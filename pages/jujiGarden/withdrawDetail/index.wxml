@@ -1,0 +1,72 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="main">
+    <view class="toper">
+        <view class='toper-box'>
+          <view class="balance">{{format.toFix(settlementDetailData.settlementAmount? settlementDetailData.settlementAmount:0)}}</view>
+          <view class="status {{settlementDetailData.status == 'PENDING'? 'activeing': settlementDetailData.status == 'CLOSED'? 'fail-active' : ''}}">{{settlementDetailData.status == 'PENDING'? '处理中': settlementDetailData.status == 'CLOSED'? '提现失败': '提现成功'}}</view>
+          <view class='tips' wx:if='{{settlementDetailData.status == "CLOSED"}}'>{{settlementDetailData.failReason}}</view>
+        </view>
+    </view>
+    <view class="content">
+        <view class="bgb itemWrap" style="margin-bottom: 30rpx;">
+            <view class="tit">提现信息</view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">提取金额</view>
+                <view class="txt">{{format.toFix(settlementDetailData.settlementAmount? settlementDetailData.settlementAmount : 0)}}</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">收款方式</view>
+                <view class="txt">{{settlementDetailData.transferChannel == 'CHANNEL_WECHAT_PAY'? '微信' : '-'}}</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">收款账户</view>
+                <view class="txt">{{settlementDetailData.account}}</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">提现时间</view>
+                <view class="txt">{{settlementDetailData.transferDate}}</view>
+            </view>
+            <view class="item ub ub-ac" wx:if='{{settlementDetailData.status == "SUCCESS"}}'>
+                <view class="ub-f1">到账时间</view>
+                <view class="txt">{{settlementDetailData.arrivalDate}}</view>
+            </view>
+        </view>
+        <view class="bgb itemWrap">
+            <view class="tit">订单信息</view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">推广商品</view>
+                <view class="txt">{{settlementDetailData.goodsName}}</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">商品规格</view>
+                <view class="txt">{{settlementDetailData.skuName}}</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">买家用户</view>
+                <view class="txt">{{settlementDetailData.buyerName? settlementDetailData.buyerName : '-'}}</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">推广桔长</view>
+                <view class="txt">{{settlementDetailData.distributorName}}</view>
+            </view>
+            <!-- <view class="item ub ub-ac">
+                <view class="ub-f1">管理佣金</view>
+                <view class="txt">{{}}</view> 
+            </view> -->
+            <view class="item ub ub-ac">
+                <view class="ub-f1">订单编号</view>
+                <view class="txt">{{settlementDetailData.orderNo}}</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">下单时间</view>
+                <view class="txt">{{settlementDetailData.orderDate}}</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">商户名称</view>
+                <view class="txt">{{settlementDetailData.merchantName}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="service ub ub-ac ub-pc">对此订单有疑问，请拨打<text catchtap="onTelClick">桔集服务技术支持</text></view>
+</view>

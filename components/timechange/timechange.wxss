@@ -1,0 +1,10 @@
+.ub { display: -webkit-flex; display: flex; position: relative; }
+.ub-ac { -webkit-align-items: center; align-items: center; }
+.ub-pc { -webkit-justify-content: center; justify-content: center; }
+.num{display:inline-block;background-color:#E83221;border-radius:10rpx;height:40rpx;line-height:40rpx;font-size:26rpx;color:#FFFFFF;letter-spacing:0;text-align:center;padding: 0 6rpx;min-width: 40rpx;box-sizing:border-box;}
+.wrap{height:40rpx;}
+.line{display:inline-block;width:20rpx;text-align:center;line-height:40rpx;font-size:24rpx;color:#E83221;font-weight:bold;}
+.block{background-color:#474244!important;height:35rpx!important;line-height:35rpx!important;border-radius:8rpx!important;font-size:22rpx!important;min-width: 35rpx;box-sizing:border-box;}
+.red{height:35rpx!important;line-height:35rpx!important;border-radius:8rpx!important;font-size:22rpx!important;min-width: 35rpx;box-sizing:border-box;}
+.blockTxt{color:#474244!important;}
+.rad0{border-radius:0!important;height:28rpx!important;font-size:19rpx!important;line-height:28rpx!important;min-width: 28rpx;box-sizing:border-box;}

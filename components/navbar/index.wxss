@@ -1,0 +1,7 @@
+.ub{display:-webkit-flex;display:flex}
+.ub-ac{-webkit-align-items:center;align-items:center}
+.ub-f1{-webkit-flex:1;flex:1}
+.navWrap{position:fixed;width:100%;top:0;background:#ffffff;color:#000;z-index:999999999}
+.navTitle{text-align:center;font-size:18px;color:#333333;font-weight:500}
+.backBtn{width:40px;height:40px;margin-left:20rpx}
+.icon_back{width:18px;height:18px;display:block}

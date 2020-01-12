@@ -1,0 +1,99 @@
+/* pages/jujiGarden/orderDetail/orderDetail.wxss */
+.head-title-box{
+  padding: 20rpx 30rpx 40rpx 30rpx;
+  background-color: #fff;
+}
+.head-title-box .head-title{
+  width: 100%;
+  height: 100%;
+}
+.head-title-box .head-title .detail-infor{
+  width: 630rpx;
+  height: 200rpx;
+  padding: 30rpx;
+  background-color: #FBFBFB;
+  border-radius: 10rpx;
+}
+.head-title-box .head-title .detail-infor image{
+  width: 220rpx;
+  height: 200rpx;
+  margin-right: 30rpx;
+}
+.consume{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #999999;
+  letter-spacing: 0;
+  margin-top: 20rpx
+}
+.name-price{
+  position: relative;
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  color: #333333;
+  width: 60%;
+  height: 200rpx
+}
+.name-price .price{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 0
+}
+.name-price .price text:first-of-type{
+  font-family: PingFangSC-Medium;
+  font-size: 34rpx;
+  color: #B4282D;
+  letter-spacing: 0;
+  margin-right: 30rpx;
+}
+.name-price .price text:last-of-type{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #666666;
+}
+.manage-money{
+  font-family: PingFangSC-Medium;
+  font-size: 26rpx;
+  color: #333333;
+  letter-spacing: 0;
+  margin-top: 40rpx
+}
+.manage-money text:first-of-type{
+  font-family: PingFangSC-Regular;
+  color: #666666;
+}
+.user-infor-box{
+  padding: 40rpx 30rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #666666;
+  letter-spacing: 0;
+}
+.user-title{
+  font-family: PingFangSC-Medium;
+  font-size: 30rpx;
+  color: #333333;
+}
+.user-infor{
+  width: 100%;
+}
+.user-infor-box .user-infor{
+  margin: 30rpx 0;
+}
+.juniu-bottom{
+  position:fixed;
+  bottom:0;
+  margin-bottom:30rpx;
+  font-family:PingFangSC-Regular;
+  font-size:24rpx;
+  color:#999999;
+  letter-spacing:0;
+  text-align:center;
+  width:100%;
+}
+.juniu-bottom text{
+  color: #FF6600;
+}

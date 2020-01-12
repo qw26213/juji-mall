@@ -1,0 +1,54 @@
+page{box-sizing:border-box;height:100%;background-color:#fbfbfb}
+.orderInfo1{background-color:#fff;position:relative;overflow:hidden;margin-bottom:20rpx;padding-bottom:0!important}
+.orderInfo1 .info{padding:30rpx;background-color:#fbfbfb;border-radius:10rpx}
+.orderInfo1 .total{font-size:26rpx;color:#333;padding-right:30rpx;padding-top:30rpx;padding-bottom:30rpx;}
+.goodImg{width:220rpx;height:220rpx;border-radius:8rpx;border:1rpx #eee solid;}
+.goodMsg{margin-left:20rpx;position:relative;height: 220rpx;}
+.goodTit{font-size:28rpx;}
+.storeName{font-size:24rpx;margin-top:10rpx;color:#999;}
+.goodAmount{font-size:26rpx;margin-top:48rpx;color:#E83221;font-weight: bold;}
+.goodAmount text.origin{margin-left:30rpx;font-size:24rpx;color:#999;text-decoration:line-through}
+.goodMsg .num{position:absolute;bottom:0rpx;right:10rpx;color:#999;font-size:22rpx;}
+.ctrl{height:88rpx;background-color:#fff;margin-top:20rpx;}
+.ctrl .status{font-size:28rpx;color:#333;font-weight:bold}
+.ctrl .txt{font-size:24rpx;color:#999;}
+.ctrl .btn{border:1rpx solid #999999;border-radius:50rpx;width:160rpx;height:50rpx;text-align:center;line-height:50rpx;font-size:24rpx;color:#333;}
+.ctrl .pay{border-radius:50rpx;width:160rpx;height:50rpx;text-align:center;line-height:50rpx;font-size:24rpx;color:#333;background-image:linear-gradient(-90deg,#FFDC00 0%,#FCBF0A 100%);}
+.item{height:100rpx;background-color:#fff;border-bottom:1rpx #eee solid;}
+.itemTit{font-size:28rpx;}
+.numberCtrl .ctlbtn{color:#999;width:40rpx;height:40rpx;display:block;background-color:#f5f5f5;}
+.numberCtrl .num{width:60rpx;height:40rpx;text-align:center;font-size:24rpx;color:#333;background-color:#f5f5f5;line-height:40rpx;margin:0 10rpx;}
+.orderInfo2{padding:0 30rpx 40rpx;background-color:#fff;}
+.orderInfo2 .tx-c{font-size:34rpx;color:#000;padding:40rpx 0 30rpx 0;line-height: 34rpx;}
+.barDiv{background-color:#fbfbfb;border-radius:10rpx}
+.orderInfo2 .udb{margin:0 auto;}
+.orderInfo2 .div{width:520rpx;margin:0 auto;}
+.orderInfo2 .txt{font-size:22rpx;color:#999999;padding:30rpx 0;line-height: 22rpx;}
+.tkDiv{height:96rpx;background-color:#fff;}
+.tkDiv .udb{width:28rpx;height:28rpx;margin-right:10rpx;}
+.tkDiv .txt{font-size:24rpx;color:#999999;}
+.tkDiv .btn{width:86rpx;height:40rpx;font-size:20rpx;color:#FCBF0A;border:2rpx solid #FCBF0A;border-radius:8rpx;}
+.orderInfo3{background-color:#fff;padding-bottom:20rpx;padding-top:20rpx;}
+.orderInfo3 .tit{line-height:50rpx;color:#333;font-size:28rpx;font-weight:bold;}
+.orderInfo3 .txt{line-height:50rpx;font-size:26rpx;color:#999;}
+.copybtn{width:70rpx;height:40rpx;border:#999 1rpx solid;border-radius:4rpx;font-size:22rpx;color:#333;position:absolute;top:0;right:20rpx;}
+canvas{width:664rpx;height:136rpx;margin: 0 auto;}
+.btnWrap{padding-left: 30rpx;padding-right: 30rpx;margin-top: 100rpx;}
+.payBtn{border-radius:50rpx;width:100r%;height:88rpx;text-align:center;line-height:88rpx;font-size:30rpx;color:#333;background-image:linear-gradient(-90deg,#FFDC00 0%,#FCBF0A 100%);font-weight: bold;}
+.orderInfo4{background-color: #fbfbfb;padding: 20rpx 30rpx 25rpx;}
+.orderInfo4 view.code{text-align: center;font-size: 32rpx;line-height: 60rpx;color: #666;}
+.orderInfo4 view.d{text-decoration: line-through;}
+.orderInfo4 view.txt{text-align: center;font-size: 24rpx;line-height: 40rpx;color: #999;margin-top: 15rpx;}
+
+.orderInfo4 .div{width:550rpx;margin:0 auto;height: 30rpx;margin-top: 10rpx;}
+
+.orderInfo4 .div .c{width: 60rpx;text-align: center;color: #999;font-size: 24rpx;}
+
+.orderInfo4 view.txt1{text-align: center;font-size: 24rpx;line-height: 40rpx;color: #999;}
+.txt6{font-size: 28rpx;color: #333333;}
+.div4 .text{font-size: 24rpx;color: #666666;}
+.div4{width:100%;height: 70rpx;border-top:#eee solid 1rpx;}
+.txt5{font-size: 24rpx;margin-right: 10rpx;}
+
+.orderInfo8{background-color:#fff;padding-top:20rpx;padding-bottom: 12rpx;}
+.orderInfo8 .tit{line-height:50rpx;color:#333;font-size:28rpx;font-weight:bold;}

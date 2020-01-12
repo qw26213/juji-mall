@@ -1,0 +1,8 @@
+{
+    "usingComponents":
+    {
+        "nav-bar": "/components/navbar/index"
+    },
+
+    "enablePullDownRefresh": true
+}

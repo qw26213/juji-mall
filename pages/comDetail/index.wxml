@@ -1,0 +1,377 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="container {{isShowModal?'':'ovh'}} {{showJcModal?'noscroll':''}}" wx:if="{{isShowData}}">
+    <view class="swiper-wrap">
+        <swiper class="img-wrap" autoplay="true" interval="3000">
+            <block wx:for="{{showPics}}" wx:key="{{index}}">
+                <swiper-item>
+                    <image mode="aspectFit" src="{{item?'https://upic.juniuo.com/file/picture/' + item + '/resize_751_420/mode_filt/format_jpg/quality_70':''}}" data-url="{{item}}" bindtap="previewImage" class="slide-image" lazy-load="true" />
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="typePop" wx:if="{{productInfo.type=='POINT'}}">桔子换礼</view>
+    </view>
+    <view class="businessInfo-wrap">
+        <view class="businessInfo" style="padding-bottom:{{showJoinClub?'10rpx':'30rpx'}};">
+            <view style="display:flex;justify-content: space-between;align-items: flex-start;">
+                <view class="title">
+                    {{productInfo.productName}}
+                </view>
+                <view class="moreJuzi" bindtap="toGetPoint" wx:if="{{false}}">
+                    做任务赚桔子
+                    <image src="/images/arrow-right.png" style="width:14rpx;height:26rpx;margin-left:20rpx;"></image>
+                </view>
+            </view>
+            <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
+                <view class="ub ub-fe">
+                    <view style="display:flex;align-items: flex-end;">
+                        <view class="price1" wx:if="{{productInfo.point>0}}">{{productInfo.point}}</view>
+                        <view class="price2" wx:if="{{productInfo.point>0}}">桔子</view>
+                        <view class="price2" wx:if="{{productInfo.point>0&&productInfo.price>0}}">+</view>
+                        <view class="price1" wx:if="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</view>
+                        <view class="price2" wx:if="{{productInfo.price>0}}">元</view>
+                    </view>
+                    <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+                    <view class="proDiv ub ub-ac" wx:if="{{isShowProfit&&productInfo.distributor}}">
+                        <view class="l">赚</view>
+                        <view class="r">￥{{filter.toFix(productInfo.distributorSalesRebate)}}</view>
+                    </view>
+                </view>
+                <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">
+                    <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{productInfo.soldNum}}件
+                </view>
+            </view>
+
+            <!-- 加入群聊 -->
+            <view class="joinClubWrap" wx:if="{{showJoinClub}}" bindtap="showJcModal">
+              <view class="jcTitle">戳一下进入福利群</view>
+              <view class="jcInner ub ub-ac">
+                <image src="/images/group.png" class="jcImg"></image>
+                <view class="jcRight">
+                    <view class="jcName">{{welfareGroup.title}}</view>
+                    <view class="jcHongBaoWrap ub ub-ac">
+                      <image src="/images/hongbao.png" class="jcHongBao"></image>
+                      <view class="jcHongBaoText">{{welfareGroup.info}}</view>
+                    </view>
+                </view>
+              </view>
+              
+              <button class="jcBtn">戳一下</button>
+            </view>
+        </view>
+    </view>
+    <image style="width:100rpx;height:100rpx;display:none" src="{{userImgUrl}}"></image>
+    <view class="yongkaxuzhi-wrap" style="margin-top:0;">
+        <view class="yongkaxuzhi">
+            <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
+            <view class="xuzhiBorder">
+              <!-- <view class="arrowBtnWrap">
+                <image src="/images/icon_drop.png" class="arrowBtn {{showMoreXuZhi?'arrowTop':''}}"></image>
+              </view> -->
+              <view class="xuzhiInner">
+                <view class="{{index+1 == note.length?'':'mb20'}}" wx:for="{{note}}" wx:key="{{index}}">
+                    <view style="display:flex;align-items:center;" wx:if="{{item.title}}">
+                        <view class="y-point"></view>
+                        <view style="font-size: 28rpx;color: #999999;">{{item.title}}</view>
+                    </view>
+                    <view wx:for="{{item.content}}" wx:for-index="idx" wx:for-item="it" wx:key="{{idx}}" style="display:flex;align-items:flex-start;margin-top:10rpx;">
+                        <view class="gray-point"></view>
+                        <view style="font-size: 24rpx;color: #333333;width:98%;">{{it}}</view>
+                    </view>
+                </view>
+              </view>
+            </view>
+        </view>
+    </view>
+    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{store&&store.name}}">
+        <view class="yongkaxuzhi">
+            <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">门店信息</view>
+            <view class="row jc-sb" style="margin-top:30rpx;">
+                <view style="font-size: 28rpx;color:#333333;">{{store.name}}</view>
+                <view class="row" bindtap="toMerchantsList">
+                    <view style="font-size: 24rpx;color: #999999;">适用{{productInfo.nearStoreCount?productInfo.nearStoreCount:0}}家门店</view>
+                    <image style="width:14rpx;height:26rpx;margin-left:20rpx;" src="/images/arrow-right.png"></image>
+                </view>
+            </view>
+            <view class="line" style="margin-top:30rpx;"></view>
+            <view class="row jc-sb" style="margin-top:26rpx;">
+                <view class="row" bindtap="toMap">
+                    <image style="width:20rpx;height:23rpx;margin-right:10rpx;" src="/images/position.png"></image>
+                    <view style="font-size: 24rpx;color: #666666;">{{store.address}}</view>
+                </view>
+                <image bindtap="call" style="width:30rpx;height:30rpx;" src="/images/call.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{commentCount>0}}">
+        <view class="yongkaxuzhi row jc-sb">
+            <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价({{commentCount}})</view>
+            <view class="row" bindtap="toCommentList" wx:if="{{commentCount>2}}">
+                <view style="font-size:24rpx;color:#999999;">查看全部</view>
+                <image style="margin-left:20rpx;width:14rpx;height:26rpx;" src="/images/arrow-right.png"></image>
+            </view>
+        </view>
+        <view class="item" wx:for="{{commentList}}" wx:key="{{index}}" data-comid="{{item.id}}">
+            <view class="nickMsg ub ub-ac">
+                <image class="userImg" src="{{item.avatar?item.avatar:''}}"></image>
+                <view class="nickname">{{item.nickName}}</view>
+                <view class="ub ub-f1 ub-ac ml10">
+                    <image class="icon_ping" src="/images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
+                    <image class="icon_ping" src="/images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>
+                </view>
+                <view class="times" hidden="{{true}}">{{item.dateCreated}}</view>
+            </view>
+            <view class="content">{{item.content}}</view>
+            <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
+                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_320/mode_filt/format_jpg/quality_70':''}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+        <view class="yongkaxuzhi">
+            <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
+            <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
+                <view wx:if="item.content.length>0" wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" style="font-size: 26rpx;line-height:40rpx;color: #333;margin-top:30rpx;">{{item2}}</view>
+                <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;margin-top:30rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" data-url="{{item1}}" bindtap="previewImage" bindload="desImgLoad" lazy-load="true"></image>
+            </view>
+        </view>
+    </view>
+    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;background:#fff;padding: 30rpx 20rpx;" wx:if="{{recommendCount>0}}">
+        <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">同店推荐</view>
+        <view class="pubu">
+            <view class="pubuItem">
+                <view class="cardWrap padr10">
+                    <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
+                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                        <view class="pubuname">{{item.productName}}</view>
+                        <view class="ub ub-ac ub-pj" style="margin-top:2rpx;">
+                            <view class="ex-juzi">
+                                <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</text></view>
+                                <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                                <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="pubuItem">
+                <view class="cardWrap padl10">
+                    <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
+                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                        <view class="pubuname">{{item.productName}}</view>
+                        <view class="ub ub-ac ub-pj" style="margin-top:2rpx;">
+                            <view class="ex-juzi">
+                                <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</text></view>
+                                <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                                <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 成为桔长推广商品获得返利 -->
+    <view class="ub ub-ac ub-pc" style="width: 100%;padding-top: 10rpx;padding-bottom: 30rpx;background:#fff;margin-top:20rpx;">
+      <image src="/images/mjuzhang.png" style="width:693rpx;height:175rpx;" bindtap="openJztgModal"></image>
+    </view>
+
+    <!-- <view class="phoneWrap">
+        <view class="phoneView ub ub-ac" bindtap="callPhone">
+            <image src="/images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
+            <view class="phoneInner">
+                <view>桔集-桔美好生活，集好店优惠</view>
+                <view class="ub ub-ac" style="margin-top: 10rpx;">
+                    <image src="/images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139
+                </view>
+            </view>
+        </view>
+    </view> -->
+    <view class="footer">
+        <view class="homeWrap" bindtap="gohomepage">
+            <image src="/images/shouye.png" style="width:48rpx;height:48rpx;"></image>
+        </view>
+        <button class="homeWrap toBg" bindtap="showShare">
+            <image src="/images/fenxiang.png" style="width:48rpx;height:48rpx;"></image>
+        </button>
+        <form bindsubmit="collectFormIds" report-submit="true" wx:if="{{productInfo.distributor}}">
+          <view class="proBtns ub ub-ac">
+            <view class="ub-f1 ub ub-ver ub-ac ub-pc l" bindtap="toBuy">
+              <text class="txt1">购买</text>
+              <text class="txt2">返{{filter.toFix(productInfo.distributorSalesRebate)}}元</text>
+            </view>
+            <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPro" data-id="{{productInfo.productId}}">
+              <text class="txt1">推广</text>
+              <text class="txt2">赚{{filter.toFix(productInfo.distributorSalesRebate)}}元</text>
+            </view>
+          </view>
+        </form>
+        <!-- 判断用户橘子足不足  和是否只能原价购买 -->
+        <form bindsubmit="collectFormIds" report-submit="true" wx:else>
+            <!-- 如果是桔子和人民币组合购买 -->
+            <!-- 4月02日修改的逻辑 -->
+            <view class="footerBtnWrap" wx:if="{{productInfo.point>0&&productInfo.price>0}}">
+                <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct" wx:if="{{productInfo.stock&&productInfo.price>0&&pointBalance>=productInfo.point}}">
+                    <view>
+                        <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
+                        <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
+                    </view>
+                </button>
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct" wx:if="{{pointBalance<productInfo.point||!pointBalance}}">
+                    <view>
+                        <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
+                        <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
+                    </view>
+                </button>
+            </view>
+            <!-- 如果是只能人民币购买的商品 -->
+            <view class="footerBtnWrap" wx:if="{{!productInfo.point&&productInfo.price>0}}">
+                <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
+                <button wx:else form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct">
+                    <view>
+                        <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{filter.toFix(productInfo.price)}}元</view>
+                        <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即购买</view>
+                    </view>
+                </button>
+            </view>
+            <!-- 如果只能用桔子兑换的商品 -->
+            <view class="footerBtnWrap" wx:if="{{productInfo.point&&!productInfo.price}}">
+                <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
+                <!-- 如果桔子充足 -->
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct" wx:if="{{productInfo.stock&&pointBalance>=productInfo.point}}">
+                    <view>
+                        <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
+                        <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
+                    </view>
+                </button>
+                <!-- 如果桔子不足 跳转到任务 -->
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct" wx:if="{{productInfo.stock&&pointBalance<productInfo.point||!pointBalance}}">
+                    <view>
+                        <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
+                        <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
+                    </view>
+                </button>
+            </view>
+        </form>
+    </view>
+    <!-- <BuyCardRadioGroup cardsDataList="{{huiyuancards}}" merchantId="{{merchantId}}" isShowHycardModal="{{isShowHycardModal}}" bind:closeEvent="_closeEvent" bind:showPreBuyCardEvent="showPreBuyCardModal"></BuyCardRadioGroup> -->
+    <!-- <view class="modal" hidden="{{isShowFocusModal}}">
+    <view class="gxbox">
+      <view class="title">
+        <view class="closeModal" bindtap="closeFocusModal">×</view>
+      </view>
+      <view class="focusSuccess ub ub-pc" wx:if="{{focusBoxMaker}}">关注成功</view>
+      <view class="focusSuccess ub ub-pc" wx:else>已取消关注</view>
+      <view class="gxdetail ub ub-pc" wx:if="{{focusBoxMaker}}">已共享TA的会员卡</view>
+      <view class="gxboxBtnWrap">
+        <view class="gxboxBtn" bindtap="closeFocusModal">确定</view>
+      </view>
+    </view>
+  </view> -->
+    <!-- <confirmBox isShowConfirmModal="{{isShowConfirmModal}}" confirmBoxTitle="{{confirmTitle}}" confirmBoxContent="{{confirmContent}}"></confirmBox> -->
+    <view class="modal1 ub ub-ver" hidden="{{isShowModal}}">
+        <view class="div ub-f1 ub ub-ac ub-pc">
+            <view style="width:100%;height:100%;background-color:rgba(0,0,0,0.3);position:absolute;z-index:1;top: 0;left: 0" bindtap="closeModal"></view>
+            <view class="canvas" hidden="{{isShowCanvas}}">
+                <canvas canvas-id="myCanvas"></canvas>
+            </view>
+        </view>
+        <view class="bott ub ub-ac">
+            <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
+                <image class="share" src="/images/share_friend.png" style="width:117rpx;height:118rpx"></image>
+            </button>
+            <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="showShareModal" data-type="1">
+                <image class="share" src="/images/share_save.png" style="width:94rpx;height:118rpx"></image>
+            </button>
+        </view>
+    </view>
+    <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
+        <view class="newerGetModal">
+            <image src="/images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
+            <image src="/images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
+            <image src="/images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
+        </view>
+    </view>
+
+    <view class="jcModalWrap" hidden="{{!showJcModal}}">
+      <view class="jcModal">
+          <image src="/images/quliao.png" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
+          <view class="jcModalText" style="margin-top:57rpx;">点击下方“去回复”按钮，并发送</view>
+          <view class="jcModalText" style="margin-top:6rpx;">数字“{{welfareGroup.code}}”邀请你进群</view>
+          <view class="jcModalBtnWrap"><button class="jcModalBtn" open-type='contact' session-from='weapp'>去回复</button></view>
+          <image src="/images/newerGetClose.png" class="jcModalClose" bindtap="closeJcModal"></image>
+      </view>
+    </view>
+
+    <view class="jztgModalWrap" wx:if="{{showJztgModal}}">
+      <view class="jztgModal">
+      <image src="/images/mjuzhangtop.png" style="width:100%;height: 200rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
+      <view class="jztgModalContent">
+        <view class="ub ub-ac">
+          <view class="point1"></view>
+          <view class="jztgModalTitle">如何成为桔长</view>
+        </view>
+        <view style="font-size: 24rpx;color: #666666;margin-left: 25rpx;margin-top: 20rpx;">成功邀请10名新人，即可获得桔长资格</view>
+        <view class="ub ub-ac mt30">
+          <view class="point1"></view>
+          <view class="jztgModalTitle">桔长专属权益</view>
+        </view>
+        <view class="ub ub-fs mt30">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">专享低价：</view>
+          </view>
+          <view class="jztgModalText">可享受桔长超低专属折扣，自购超级省钱</view>
+        </view>
+        <view class="ub ub-fs mt20">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">推广赚钱：</view>
+          </view>
+          <view class="jztgModalText">推广商品，平均可获得15%的商品返利</view>
+        </view>
+        <view class="ub ub-fs mt20">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">免费体验：</view>
+          </view>
+          <view class="jztgModalText">桔长可享受更多免费体验吃喝玩乐游的机会</view>
+        </view>
+        <view class="ub ub-fs mt20">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">专属培训：</view>
+          </view>
+          <view class="jztgModalText">可享受专属营销推广培训，平台专业运营人员手把手传授</view>
+        </view>
+        <view class="ub ub-fs mt20">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">轻松推广：</view>
+          </view>
+          <view class="jztgModalText">推广素材可由平台小编编写，一键保存转发即可</view>
+        </view>
+      </view>
+      <view class="jztgModalBtnWrap"><button class="jztgModalBtn" bindtap="openJztgShare">立即邀请好友</button></view>
+          <image src="/images/newerGetClose.png" class="jztgModalClose" bindtap="closeJztgModal"></image>
+      </view>
+    </view>
+    <view class="selectWrap" hidden="{{!isShowSelect}}" bindtap="toggleSelect"></view>
+    <view class="ub ub-ver selectModal" hidden="{{!isShowSelect}}">
+        <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
+        <view class="ub ub-ac selectTit">选择规格</view>
+        <view class="selectType">
+            <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}} {{item.stock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.stock}}">{{filter.toEllipsised(item.skuName)}}</view>
+        </view>
+        <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
+            <text class="uu" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}桔子</text>
+            <text class="uu" wx:if="{{defaultSku.point>0&&defaultSku.price>0}}">+</text>
+            <text class="uu" wx:if="{{defaultSku.price>0}}">{{filter.toFix(defaultSku.price)}}元</text>
+        </view>
+        <button class="selectBtn" bindtap="okSelect">选好了</button>
+    </view>
+</view>
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{..._toast_ }}" />

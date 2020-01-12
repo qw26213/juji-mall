@@ -1,0 +1,131 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view id="app" class="app" style="height:{{conHeight}}px">
+  <view class="main">
+    <view class="bg">
+      <view class="contentWrap">
+        <view class="content">
+          <image src="{{headImg?'https://upic.juniuo.com/file/picture/'+headImg+'/resize_200_200/mode_filt/format_jpg/quality_0':''}}" class="shopLogo"></image>
+          <view class="tit tx-c">付款给{{storeName}}</view>
+          <view class="rechargeDiv ub ub-ac ub-pc">
+            <view class="remark {{showSelectCard?'font50':''}}">￥</view>
+            <view class="input ub ub-ac {{showFocus?'animation':''}} {{!showSelectCard?'ub-f1':''}}">{{amount}}</view>
+          </view>
+        </view>
+        <view class="blanceWrap2" wx:if="{{showBalanceWrap}}">
+          <view class="blBox">
+            <view class="noselect {{seledAccount?'select':''}}" bindtap="clickAccountPay"></view>
+            <view class="blanceT1">余额支付</view>
+          </view>
+          <view class="blBox">
+            <view class="blanceT2">我的余额</view>
+            <view class="blanceNum">￥{{balance}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="keyboardBox trans-fade" hidden="{{showSelectCard}}">
+      <view class="selectCarCon">
+        <view class="kbclo1">
+          <view class="number clearfix">
+            <view wx:for="{{numArr}}" wx:key="{{index}}" bindtap="keyTap" data-num="{{item}}">{{item}}</view>
+          </view>
+          <view class="kbrow">
+            <view class="point" bindtap="keyTap" data-num=".">·</view>
+            <view class="zero" bindtap="keyTap" data-num="0">0</view>
+          </view>
+        </view>
+        <view class="kbclo2">
+          <view class="del" bindtap="keyTap" data-num="-">
+            <image src="../../images/shanchu.png"
+              ></image>
+          </view>
+          <view class="pay {{(amount != '' && amount != '请输入付款金额' && amount != 0 && storeId)?'toResult':''}} {{accountpaystatus?'accountpaying':''}}" bindtap="toResult">
+            <view>付</view>
+            <view style="margin-top:.1rem;">款</view>
+            <view class="triple-bounce" wx:if="{{accountpaystatus}}">
+              <view class="triple-bounce-bounce1"></view>
+              <view class="triple-bounce-bounce2"></view>
+              <view class="triple-bounce-bounce3"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="trans-fade selectCardWrap" hidden="{{!showSelectCard}}">
+      <view class="titleRow" bindtap="changePaytype" hidden="{{cardList.length > 0?false:true}}">
+        <view class="titleWrap">
+          <view class="vip"></view>
+          <view class="title">储值支付</view>
+          <view class="sheng"></view>
+        </view>
+        <view class="titleWrap">
+          <view style="font-size: 24rpx;color: #999999;margin-right:20rpx;">仅限本商户使用</view>
+          <view class="noselect {{paytype==='recommend'?'select':''}}"></view>
+        </view>
+      </view>
+<!-- current-item-id="{{selectCardId}}" -->
+      <swiper wx:if="{{cardList.length>0}}" class="swiper-container cardList" indicator-color="#fff" display-multiple-items="{{cardList.length<2?1:2}}" next-margin="100rpx" >
+        <swiper-item style="box-sizing:border-box;padding-right:20rpx;overflow:hidden;" wx:for="{{cardList}}" wx:key="unique"  data-item="{{item}}" data-index="{{index}}" item-id="{{item.prepayRuleId}}" bindtap="changeSelectCard">
+        <view class="card {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'selectCard':''}}">
+          <view class="yu-e-Title {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardTitle':''}}">储值{{item.pay}}元</view>
+          <view class="yu-e-Amount {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardAmount':''}}">送{{item.givingMoney}}元</view>
+          <view class="{{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardSelected':''}}"></view>
+        </view>
+        </swiper-item>
+      </swiper>
+
+      <view class="titleRow" bindtap="changePaytype3">
+        <view class="titleWrap">
+          <view class="weixin"></view>
+          <view class="title">微信支付</view>
+        </view>
+        <view class="noselect {{(paytype=='thirdpay')||(seledAccount&&paytype==='account')?'select':''}}"></view>
+      </view>
+
+      <view class="underBox">
+        <view class="youhuiWrap">
+          <view class="youhui" wx:if="{{paytype==='recommend'}}">储值尊享{{discount}}折优惠</view>
+          <!-- <view class="youhui" hidden="paytype==='account'&&Number(balance) >= Number(amount)">支付后账户余额为
+                        ¥<span style="font-size: .32rem;color: #6A3C12;">{{Number(balance - amount).toFixed(2)}}</span></view> -->
+          <!-- <view class="youhui" hidden="paytype==='account'&&Number(amount) > Number(balance)">余额支付
+                        ¥<span style="font-size: .32rem;color: #6A3C12;">{{balance}}</span> + 微信支付 ¥<span style="font-size: .32rem;color: #6A3C12;">{{Number(amount-balance).toFixed(2)}}</span></view> -->
+          <view class="youhui" wx:if="{{paytype==='thirdpay'}}">储值享优惠，推荐使用储值支付</view>
+        </view>
+        <view class="jiesuanBtnWrap">
+          <view class="jiesuanBtn {{toPayStatus?'jiesuaned':''}}" wx:if="{{paytype==='account'&&seledAccount}}" bindtap="toPay">
+            支付
+            <view class="triple-bounce" wx:if="{{toPayStatus}}">
+              <view class="triple-bounce-bounce1"></view>
+              <view class="triple-bounce-bounce2"></view>
+              <view class="triple-bounce-bounce3"></view>
+            </view>
+          </view>
+          <view class="jiesuanBtn {{toPayStatus?'jiesuaned':''}}" wx:if="{{paytype==='recommend'}}" bindtap="toPay">
+            储值并支付
+            <view class="triple-bounce" wx:if="{{toPayStatus}}">
+              <view class="triple-bounce-bounce1"></view>
+              <view class="triple-bounce-bounce2"></view>
+              <view class="triple-bounce-bounce3"></view>
+            </view>
+          </view>
+          <view class="jiesuanBtn {{toPayStatus?'jiesuaned':''}}" wx:if="{{paytype==='thirdpay'}}" bindtap="toPay">
+            支付
+            <view class="triple-bounce" wx:if="{{toPayStatus}}">
+              <view class="triple-bounce-bounce1"></view>
+              <view class="triple-bounce-bounce2"></view>
+              <view class="triple-bounce-bounce3"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="toResultLoading" hidden="toResultLoading">
+    <view class="white-bounces">
+      <view class="white-bounce1"></view>
+      <view class="white-bounce2"></view>
+      <view class="white-bounce3"></view>
+    </view>
+  </view>
+</view>

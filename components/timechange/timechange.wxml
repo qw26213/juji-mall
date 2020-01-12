@@ -1,0 +1,7 @@
+<view class="wrap ub ub-ac ub-pc">
+    <text class="num {{customeClass=='block'?'block':''}} {{customeClass=='red'?'red':''}} {{radius==0?'rad0':''}}">{{restHour}}</text>
+    <text class="line {{customeClass=='block'?'blockTxt':''}}">:</text> 
+    <text class="num {{customeClass=='block'?'block':''}} {{customeClass=='red'?'red':''}} {{radius==0?'rad0':''}}">{{restMinute}}</text>
+    <text class="line {{customeClass=='block'?'blockTxt':''}}">:</text> 
+    <text class="num {{customeClass=='block'?'block':''}} {{customeClass=='red'?'red':''}} {{radius==0?'rad0':''}}">{{restSecond}}</text>
+</view>

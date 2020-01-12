@@ -1,0 +1,169 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="toper">
+  <view class="t3">实付金额(元)</view>
+  <view class="ttWrap">
+    <view class="ub ub-ac ub-pc">
+      <view wx:if="{{dataInfo.refundType}}" class="syb">+</view>
+      <view class="t1">{{dataInfo.totalMoney?dataInfo.totalMoney:0}}</view>
+    </view>
+    <view class="t2" wx:if="{{!dataInfo.refundType}}">交易成功</view>
+    <view class="t2" wx:if="{{dataInfo.refundType}}">已退款</view>
+  </view>
+</view>
+<!-- 如果是退款订单 -->
+<view class="content" wx:if="{{dataInfo.refundType}}">
+  <view class="box">
+    <view class="title">退款信息</view>
+    <view class="item">
+      <view class="label">微信退款金额</view>
+      <view class="value">{{dataInfo.wxPayMoney?dataInfo.wxPayMoney:0}}</view>
+    </view>
+    <view class="item">
+      <view class="label">账户退款金额</view>
+      <view class="value">{{dataInfo.prepayMoney?dataInfo.prepayMoney:0}}</view>
+    </view>
+    <view class="item">
+      <view class="label">退款总金额</view>
+      <view class="value">{{dataInfo.totalMoney?dataInfo.totalMoney:0}}</view>
+    </view>
+    <!-- <view class="barWrap">
+      <canvas canvas-id="barcode2"></canvas>
+    </view> -->
+  </view>
+</view>
+<!-- 如果是付款订单 -->
+<view class="content" wx:if="{{!dataInfo.refundType}}">
+
+  <view class="box">
+    <view class="title">支付信息</view>
+    <view class="item">
+      <view class="label">支付方式</view>
+      <view class="value" wx:if="{{dataInfo.type=='recommend'}}">储值支付</view>
+      <view class="value" wx:if="{{dataInfo.type=='account'&&(!dataInfo.wxPayMoney||filter.toNum(dataInfo.wxPayMoney)==0)}}">预存支付</view>
+      <view class="value" wx:if="{{dataInfo.type=='account'&&filter.toNum(dataInfo.wxPayMoney)!=0}}">组合支付</view>
+      <view class="value" wx:if="{{dataInfo.type=='thirdpay'&&dataInfo.payType=='wxpay'}}">微信支付</view>
+      <view class="value" wx:if="{{dataInfo.type=='thirdpay'&&dataInfo.payType=='alipay'}}">支付宝支付</view>
+    </view>
+    <!-- 组合支付 -->
+    <view class="item" wx:if="{{dataInfo.type=='account'&&dataInfo.wxPayMoney!=0}}">
+      <view class="label">订单金额</view>
+      <view class="value">
+        {{dataInfo.totalMoney?dataInfo.totalMoney:0}}
+      </view>
+    </view>
+    <view class="item" wx:if="{{dataInfo.type=='account'&&filter.toNum(dataInfo.wxPayMoney)!=0}}">
+      <view class="label" wx:if="{{dataInfo.payType=='wxpay'}}">微信实收金额</view>
+      <view class="label" wx:if="{{dataInfo.payType=='alipay'}}">支付宝实收金额</view>
+      <view class="value">
+        {{dataInfo.wxPayMoney?dataInfo.wxPayMoney:0}}
+      </view>
+    </view>
+    <view class="item" wx:if="{{dataInfo.type=='account'&&filter.toNum(dataInfo.wxPayMoney)!=0}}">
+      <view class="label">预存实收金额</view>
+      <view class="value">
+        {{dataInfo.prepayMoney?dataInfo.prepayMoney:0}}
+      </view>
+    </view>
+    <view class="item" wx:if="{{dataInfo.type=='account'&&filter.toNum(dataInfo.wxPayMoney)!=0}}">
+      <view class="label">实收总金额</view>
+      <view class="value">
+        {{dataInfo.totalMoney?dataInfo.totalMoney:0}}
+      </view>
+    </view>
+    <!-- 储值并支付 -->
+    <view class="item" wx:if="{{dataInfo.type=='recommend'}}">
+      <view class="label">储值金额</view>
+      <view class="value">
+        {{dataInfo.addMoney?filter.toNum(dataInfo.addMoney-dataInfo.givingMoney):0}}
+      </view>
+    </view>
+    <view class="item" wx:if="{{dataInfo.type=='recommend'}}">
+      <view class="label">赠送金额</view>
+      <view class="value">
+        {{dataInfo.givingMoney?dataInfo.givingMoney:0}}
+      </view>
+    </view>
+    <!-- 余额支付 -->
+    <view class="item" wx:if="{{dataInfo.type=='account'&&(!dataInfo.wxPayMoney||dataInfo.wxPayMoney=='0.00')}}">
+      <view class="label">订单金额</view>
+      <view class="value">
+        {{dataInfo.prepayMoney?dataInfo.prepayMoney:0}}
+      </view>
+    </view>
+    <view class="item" wx:if="{{dataInfo.type=='account'&&(!dataInfo.wxPayMoney||dataInfo.wxPayMoney=='0.00')}}">
+      <view class="label">实付金额</view>
+      <view class="value">
+        {{dataInfo.prepayMoney?dataInfo.prepayMoney:0}}
+      </view>
+    </view>
+    <!-- 第三方支付 -->
+    <view class="item" wx:if="{{dataInfo.type=='thirdpay'}}">
+      <view class="label">订单金额</view>
+      <view class="value">
+        {{dataInfo.wxPayMoney?dataInfo.wxPayMoney:0}}
+      </view>
+    </view>
+    <view class="item" wx:if="{{dataInfo.type=='thirdpay'}}">
+      <view class="label">实付金额</view>
+      <view class="value">
+        {{dataInfo.wxPayMoney?dataInfo.wxPayMoney:0}}
+      </view>
+    </view>
+  </view>
+  <!-- 非第三方支付显示 -->
+  <view class="box" wx:if="{{!dataInfo.refundType&&dataInfo.type!='thirdpay'}}">
+    <view class="title">账户信息</view>
+    <!-- 储值支付显示 -->
+    <view class="item" wx:if="{{dataInfo.type=='recommend'}}">
+      <view class="label">本次储值金额</view>
+      <view class="value">
+        {{dataInfo.addMoney?filter.toNum(dataInfo.addMoney-dataInfo.givingMoney):0}}
+      </view>
+    </view>
+    <view class="item" wx:if="{{dataInfo.type=='recommend'}}">
+      <view class="label">本次赠送金额</view>
+      <view class="value">
+        {{dataInfo.givingMoney?dataInfo.givingMoney:0}}
+      </view>
+    </view>
+    <!-- 储值支付 余额支付 组合支付 都显示 -->
+    <view class="item">
+      <view class="label">本次消费金额</view>
+      <view class="value">
+        {{dataInfo.prepayMoney?dataInfo.prepayMoney:0}}
+      </view>
+    </view>
+  </view>
+
+  <view class="box" wx:if="{{!dataInfo.refundType}}">
+    <view class="title">其他信息</view>
+    <view class="item">
+      <view class="label">会员账号</view>
+      <view class="value">
+        {{dataInfo.accountDto?dataInfo.accountDto.id:''}}
+      </view>
+    </view>
+    <view class="item">
+      <view class="label">交易门店</view>
+      <view class="value">
+        {{dataInfo.storeName}}
+      </view>
+    </view>
+    <view class="item">
+      <view class="label">创建时间</view>
+      <view class="value">
+        {{dataInfo.dateCreated}}
+      </view>
+    </view>
+    <view class="item">
+      <view class="label">订单号</view>
+      <view class="value">
+        {{orderId}}
+      </view>
+    </view>
+    <view class="barWrap">
+      <canvas canvas-id="barcode"></canvas>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "confirmBox": "/components/confirmBox/confirmBox",
+    "nav-bar": "/components/navbar/index"
+  }
+}

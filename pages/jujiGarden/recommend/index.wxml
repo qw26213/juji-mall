@@ -1,0 +1,53 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="main {{isShowModal?'':'ovh'}}">
+  <view class="item" wx:for="{{recommendlist}}" wx:key="{{index}}" hidden="{{isShowNodata}}">
+    <view class="info ub ub-ac plr15">
+      <image class="userImg" src="{{constant.basePicUrl}}26PwF_9ACZdy/resize_180_180/mode_filt/format_jpg/quality_0"></image>
+      <!-- <view class="nickname">{{item.editorNickName}}</view> -->
+      <view class="nickname">桔集小编</view>
+      <!-- <view class="ub-f1 txt">200次分享</view> -->
+    </view>
+    <view class="content plr15">
+      {{item.descriptions}}
+    </view>
+    <view class="imglist">
+      <view class="imgWrap" wx:for="{{item.imageIds}}" wx:for-item='it' wx:key="unique">
+        <image src="{{constant.basePicUrl}}{{it}}/resize_0_0/mode_filt/format_jpg/quality_0" mode="aspectFill" bindtap="previewImage" data-src="{{constant.basePicUrl}}{{it}}/resize_0_0/mode_filt/format_jpg/quality_0"></image>
+      </view>
+    </view>
+    <view class="ctrl ub ub-ac plr15">
+      <view class="ub-f1 ub ub-ac"></view>
+      <view class="ctrlbtn ub ub-ac" catchtap='saveMaterial' data-imgs="{{item.imageIds}}" data-desc="{{item.descriptions}}" data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.sceneId}}" data-scenepicid="{{item.scenePicId}}">
+        <image class="wxIcon" src="../../../images/icon_02.png" mode="aspectFit"></image>
+        保存素材
+      </view>
+      <view class="ctrlbtn ml20 ub ub-ac" catchtap='produceImg' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.sceneId}}" data-scenepicid="{{item.scenePicId}}">
+        <image class="wxIcon" src="../../../images/icon_01.png" mode="aspectFit"></image>
+        生成图文
+      </view>
+    </view>
+  </view>
+  <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
+    <image class="nodataImg" src="../../../images/null5.png" style="width:200rpx;height:137rpx"></image>
+    <view class="nodataTxt" style="margin-bottom:200rpx;">暂无相关素材~</view>
+  </view>
+  <view class="modal1 ub ub-ver {{isShowModal?'uhide':''}} {{isTransparnet?'transparent':''}}">
+    <view class="div ub-f1 ub ub-ac ub-pc">
+      <view style="width:100%;height:100%;background-color:rgba(0,0,0,0.3);position:absolute;z-index:1;top: 0;left: 0" bindtap="closeModal"></view>
+      <view class="canvas">
+        <canvas canvas-id="myCanvas"></canvas>
+      </view>
+    </view>
+    <view class="bott ub ub-ac">
+        <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
+            <image class="share udb" src="../../../images/share_friend.png" style="width:117rpx;height:118rpx"></image>
+        </button>
+        <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic">
+            <image class="share udb" src="../../../images/share_save.png" style="width:94rpx;height:118rpx"></image>
+        </button>
+    </view>
+  </view>
+</view>
+<import src="../../../components/toast/toast.wxml" />
+<template is="toast" data="{{..._toast_ }}" />

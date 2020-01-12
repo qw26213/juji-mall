@@ -1,0 +1,58 @@
+page{height:100%;background-color:#fff;}
+.main{background:#fff;padding:40rpx 30rpx 10rpx 30rpx;height: 100%;box-sizing:border-box;overflow: auto;}
+.fixed-button{position:fixed;right:30rpx;top:70%;width:210rpx;height:84rpx;background:#E83221;box-shadow:0 0 5rpx 1rpx #E83221;border-radius:45rpx 0 0 45rpx;line-height:84rpx;z-index:1000}
+.fixed-button .type-icon{width:66rpx;height:66rpx;border-radius:50%;background-color:#FFFFFF;margin:0 10rpx;line-height:66rpx;text-align:center}
+.fixed-button .type-icon image{width:50rpx;height:35rpx;border-radius:50%;padding-top:14rpx;}
+.fixed-button .kanjia-icon image{width:45rpx;height:45rpx;padding-top:12rpx;}
+.fixed-button text{font-family:PingFangSC-Medium;font-size:28rpx;color:#FFFFFF;letter-spacing:0;text-align:center;}
+.mtitle{font-size:40rpx;color:#333;font-weight:bold;}
+.subtitle{font-size:24rpx;color:#999;margin-top:10rpx;}
+.mRow{display:flex;}
+.jc-sb{justify-content:space-between;}
+.moreWrap{display:flex;align-items:center;padding-top:10rpx;padding-left:10rpx;}
+.more{font-size:24rpx;color:#999;margin-right:10rpx;}
+.labels-wrap{display:flex;align-items:center;margin-top:20rpx;}
+.label{width:86rpx;height:34rpx;background:#d4d4d4;border-radius:4rpx;display:flex;justify-content:center;align-items:center;font-size:20rpx;color:#fff;margin-right:20rpx;}
+.label-active{background:#ffdc00;color:#333;}
+.productItem{box-shadow:0 5px 5px 3px rgba(229,229,229,0.50);border-radius:10rpx;margin-top:30rpx;padding-bottom: 30rpx;margin-bottom: 30rpx;position: relative;}
+.productItem .productImg{width:100%;height:387rpx;border-top-left-radius:10rpx;border-top-right-radius:10rpx;}
+
+.yqgMark{display: block;width:100%;height:387rpx;border-radius: 10rpx 10rpx 0 0;position: absolute;top: 0;left: 0;z-index: 8;background: rgba(0,0,0,.5)}
+.yqgMark image{width:220rpx;height:96rpx;position:absolute;top:50%;left:50%;margin-left:-110rpx;margin-top:-48rpx;}
+
+
+.dis-wrap{display:flex;align-items:center;margin-top:10rpx;padding:0 30rpx;}
+.from{font-size:22rpx;color:#999;}
+.dis{font-size:22rpx;color:#999;}
+.pro-name{font-size:28rpx;color:#333;margin-top:15rpx;display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical;padding:0 30rpx;}
+.price-wrap{margin-top:16rpx;padding:0 30rpx;line-height:38rpx;}
+.p-wrap{display:flex;align-items:flex-end;}
+.now-price{font-size:30rpx;line-height:38rpx;color:#e83221;font-weight:bold;}
+.now-text{font-size:24rpx;line-height:24rpx;color:#e83221;font-weight:bold;margin-bottom:3rpx;}
+.old-price{font-size:22rpx;color:#999;text-decoration:line-through;margin-left:20rpx;}
+.count{font-size:24rpx;color:#999;}
+.ctrlbtn{width:120rpx;height:54rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;border-radius:6rpx;}
+.ctrlbtn0{background:#e83221;color:#fff;}
+.ctrlbtn1{background:#ffdb00;color:#333;}
+.ctrlbtn2{background:#ccc;color:#fff;}
+.ctrlbtn3{background:#ccc;color:#fff;width:156rpx!important;}
+
+.clock1{display: block;width: 27rpx;height: 26rpx;margin-right: 6rpx;}
+.had-bottom{display:block;line-height:100rpx;width:100%;height:100rpx;font-size:24rpx;color:#999;text-align:center;background-color:#fff;}
+
+.toper{position: relative;}
+.tabs{position: absolute; width: 280rpx;height: 62rpx;border:2rpx #FFDB00 solid;display: flex;right: 0;bottom: 0;border-radius: 8rpx;overflow: hidden;}
+.tabs .item{width: 140rpx;background-color: #fff;height: 62rpx;font-size: 26rpx;color: #333;}
+.tabs .item.1{border-radius:8rpx 0 0 8rpx;}
+.tabs .item.r{border-radius:0 8rpx 8rpx 0;}
+.tabs .item.on{background-color: #ffdb00;}
+
+.time{margin-top: 10rpx;}
+.time .b{background: #FDF2E3;width: 400rpx;height: 24rpx;border-radius: 20rpx;}
+.time .b .left{color: #ffffff;background: #E83221;min-width: 120rpx;border-radius: 20rpx;font-size: 20rpx;height: 26rpx;font-weight: bold;padding-left: 20rpx;line-height: 26rpx;}
+.time .b .number{width: 80rpx;color: #333;font-size: 20rpx;line-height: 26rpx;text-align: center;font-weight: bold;}
+.time .right{color: #999;font-size: 24rpx;height: 26rpx;line-height: 26rpx;}
+.restTime{margin-left: 30rpx;}
+.restTime .txt{font-size: 24rpx;color: #333333;margin-right: 12rpx;}
+.restTime1 .txt{font-size: 24rpx;color: #333333;margin-right: 12rpx;}
+.nodataDiv{padding-top: 260rpx;height: 900rpx;}

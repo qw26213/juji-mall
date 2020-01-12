@@ -1,0 +1,64 @@
+.ub{display:-webkit-flex;display:flex;position:relative;}
+.ub-ac{-webkit-align-items:center;align-items:center;}
+.ub-pc{-webkit-justify-content:center;justify-content:center;}
+.ub-pj{-webkit-justify-content:space-between;justify-content:space-between;}
+.ub-f1{-webkit-flex:1;flex:1;}
+.container{width:100%;height:auto;background:#f8f9fa;padding:0;overflow:hidden;padding-bottom:120rpx;}
+.swiper-wrap{position:relative;width:100%;height:400rpx;}
+.slide-image{height:400rpx}
+.moreJuzi{display:flex;align-items:center;font-size:24rpx;color:#666;margin-top:4rpx;}
+.line{width:100%;height:1rpx;background-color:#eeeeee;}
+.ml10{margin-left:10rpx;}
+.dis{font-size:12px;color:#999;margin-left:20rpx;}
+.yongkaxuzhi-wrap{width:100%;box-sizing:border-box;}
+.yongkaxuzhi{background-color:#fff;width:100%;padding:34rpx 30rpx;box-sizing:border-box;}
+.conTitle{font-size:30rpx;color:#333333;font-weight:bolder;}
+.xuzhi{font-size:12px;color:#999;}
+.nickname{font-size:15px;color:#333;margin-left:20rpx;}
+.footer{position:fixed;bottom:0;left:0;width:100%;height:120rpx;background:#fff;display:flex;align-items:center;justify-content:space-between;box-sizing:border-box;padding:15rpx 30rpx;}
+.footerBtnWrap{display:flex;justify-content:space-between;align-items:center;}
+.homeWrap{display:flex;flex-direction:column;justify-content:center;align-items:center;width:60rpx;}
+.toBg{padding:0;margin:0;box-sizing:border-box;border:0;background:transparent;}
+.icon-home{color:#b25dff;line-height:36rpx;height:36rpx;font-size:20px;}
+.home{font-size:24rpx;line-height:24rpx;color:#333;margin-top:10rpx;}
+.gokaBtn{width:240rpx;height:88rpx;background:#333;border-radius:44rpx 0 0 44rpx;font-size:14px;color:#fff;line-height:80rpx;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.xiadan{width:240rpx;height:88rpx;background-image:linear-gradient(-269deg,#ffdc00 0%,#fcbf0a 100%);border-radius:0 44rpx 44rpx 0;color:#333;line-height:88rpx;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.yuanjia-xiadan{width:440rpx;height:88rpx;background-image:linear-gradient(-269deg,#ffdc00 0%,#fcbf0a 100%);border-radius:44px;color:#333;line-height:80rpx;text-align:center;margin-left:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.modal{position:fixed;width:100%;left:0;top:0;height:100%;background-color:rgba(0,0,0,0.3);z-index:1;}
+.gxboxBtnWrap{width:100%;display:flex;justify-content:center;margin-top:50rpx;}
+.gxboxBtn{width:280rpx;height:80rpx;background-image:linear-gradient(-180deg,#b45fff 4%,#9649fa 99%);box-shadow:0 0 2px 1px #dcb9fb;border-radius:40rpx;font-size:14px;color:#fff;text-align:center;line-height:80rpx;}
+.tuiItem{padding:30rpx 0;}
+.b-b-1px{border-bottom:1rpx solid #eee;}
+.huanliBtn{width:130rpx;height:60rpx;background:#fcbf0a;border-radius:4px;font-size:24rpx;color:#333;display:flex;justify-content:center;align-items:center;}
+.tuiRow{width:78%;}
+.tuiName{width:70%;font-size:24rpx;color:#333;}
+.tuiExe{width:30%;font-size:24rpx;color:#e83221;display:flex;justify-content:flex-end;align-items:center;text-align:right;}
+.tuiCount{font-size:22rpx;color:#999;text-decoration:line-through;}
+.tuiPrice{font-size:24rpx;color:#999;}
+.mt10{margin-top:10rpx;}
+.item{background:#fff;padding:0 30rpx 30rpx 30rpx;}
+.userImg{width:60rpx;height:60rpx;border-radius:50%;}
+.nickname{font-size:28rpx;color:#333;margin-left:10rpx;}
+.times{font-size:20rpx;color:#999;}
+.content{line-height:48rpx;font-size:24rpx;text-align:justify;color:#333;margin-top:10rpx;}
+.imglist{margin-top:10rpx;}
+.commentPic{width:120rpx;height:120rpx;margin-right:20rpx;}
+.icon_ping{width:30rpx;height:29rpx;display:block;margin-right:10rpx;}
+.pubu{width:100%;box-sizing:border-box;display:flex;flex-direction:row;margin-top:10rpx;}
+.pubuItem{width:50%;display:flex;flex-direction:column;}
+.padr10{padding-right:10rpx;}
+.padl10{padding-left:10rpx;}
+.card{width:100%;border-radius:5px;background:#fff;box-sizing:border-box;margin-top:20rpx;}
+.plimg{width:100%;height:185rpx;}
+.pubuname{font-size:28rpx;color:#333;display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.pububox{display:flex;align-items:center;}
+.ex-juzi{display:flex;align-items:center;}
+.old-price{font-size:24rpx;color:#999;text-decoration:line-through;}
+.w-100{width:100%;box-sizing:border-box;}
+.kanjia-container{font-family:PingFangSC-Regular;background-color:#fff;padding:30rpx 30rpx;}
+.product-name{font-size:30rpx;color:#333333;}
+.bd{padding-bottom:30rpx;background:#FFFFFF;box-shadow:0 5rpx 5rpx 3rpx rgba(229,229,229,0.50);border-radius:10rpx;overflow:hidden;}
+.basow{box-shadow:0 0 6px 5px rgba(229,229,229,0.50)!important;}
+.timer{width:100%;height:100rpx;background:#FFEFEE;padding-left:20rpx;display:flex;align-items:center;box-sizing:border-box;font-size:28rpx;color:#E83221;}
+.pd30{padding:30rpx;padding-bottom:20rpx;}
+.kanjia-jindu{width:630rpx;margin:0 auto;padding-top:10rpx;}

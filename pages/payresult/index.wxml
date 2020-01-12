@@ -1,0 +1,129 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="topBox">
+    <view class="chengongimgwrap">
+        <image src="/images/chenggong.png" class="chengongimg" style="width:108rpx;height:108rpx;"></image>
+    </view>
+    <!-- 储值并支付 -->
+    <view class="zhifutip" wx:if="{{type=='recommend'}}">成功支付{{prepayMoney}}元</view>
+    <!-- 账户余额支付 -->
+    <view class="zhifutip" wx:if="{{type=='account'&&!filter.toNum(wxPayMoney)}}">成功支付{{prepayMoney}}元</view>
+    <!-- 微信支付 -->
+    <view class="zhifutip" wx:if="{{type=='thirdpay'&&wxPayMoney&&filter.toNum(wxPayMoney)>0}}">成功支付{{wxPayMoney}}元</view>
+    <!-- 组合支付 -->
+    <view class="zhifutip" wx:if="{{type=='account'&&wxPayMoney&&filter.toNum(wxPayMoney)>0}}">成功支付{{zhuheAmount}}元</view>
+    <view class="zhifutip2" wx:if="{{point>0}}">本次支付获得{{point}}个桔子</view>
+    <view class="completeBtnWrap2">
+        <view class="completeBtn2" bindtap="toCardList">查看卡包</view>
+    </view>
+</view>
+<view class="pay-detail-wrap">
+    <!-- 微信支付 -->
+    <view class="topRow" wx:if="{{type=='thirdpay'&&wxPayMoney&&filter.toNum(wxPayMoney)>0}}">微信支付{{wxPayMoney}}元</view>
+    <!-- 组合支付 -->
+    <view wx:if="{{type=='account'&&wxPayMoney&&filter.toNum(wxPayMoney)>0}}">
+        <view class="topRow"><text>微信支付</text><text style="margin-right:30rpx;">{{wxPayMoney}}元</text></view>
+        <view class="topRow"><text>账户余额支付</text><text style="margin-right:30rpx;">{{prepayMoney}}元</text></view>
+        <view class="topRow" bindtap="toggleDetailWrap"><text>账户消费明细</text>
+            <image src="/images/icon_drop.png" class="dropIcon {{showDetail?'topIcon':''}}"></image>
+        </view>
+        <view class="detailWrap {{showDetail?'showDetailWrap1':''}}">
+            <view class="detailInner">
+                <view class="topRow"><text>消费前账户余额</text><text>{{preBalance}}元</text></view>
+                <view class="topRow"><text>本次账户消费</text><text>- {{prepayMoney}}元</text></view>
+            </view>
+            <view class="topRow"><text>消费后账户余额</text><text style="margin-right:30rpx;">{{balance}}元</text></view>
+        </view>
+    </view>
+    <!-- 账户余额支付 -->
+    <view wx:if="{{type=='account'&&!filter.toNum(wxPayMoney)}}">
+        <view class="topRow b-b-1px"><text>账户余额支付</text><text style="margin-right:30rpx;">{{prepayMoney}}元</text></view>
+        <view class="topRow" bindtap="toggleDetailWrap"><text>账户消费明细</text>
+            <image src="/images/icon_drop.png" class="dropIcon {{showDetail?'topIcon':''}}"></image>
+        </view>
+        <view class="detailWrap {{showDetail?'showDetailWrap1':''}}">
+            <view class="detailInner">
+                <view class="topRow"><text>消费前账户余额</text><text>{{preBalance}}元</text></view>
+                <view class="topRow"><text>本次账户消费</text><text>- {{prepayMoney}}元</text></view>
+            </view>
+            <view class="topRow"><text>消费后账户余额</text><text style="margin-right:30rpx;">{{balance}}元</text></view>
+        </view>
+    </view>
+    <!-- 储值并支付 -->
+    <view wx:if="{{type=='recommend'}}">
+        <view class="topRow"><text>账户余额支付</text><text style="margin-right:30rpx;">{{prepayMoney}}元</text></view>
+        <view class="topRow" bindtap="toggleDetailWrap"><text>账户消费明细</text>
+            <image src="/images/icon_drop.png" class="dropIcon {{showDetail?'topIcon':''}}"></image>
+        </view>
+        <view class="detailWrap {{showDetail?'showDetailWrap2':''}}">
+            <view class="detailInner">
+                <view class="topRow"><text>消费前账户余额</text><text>{{preBalance}}元</text></view>
+                <view class="topRow"><text>本次储值金额</text><text>+ {{aMoney}}元</text></view>
+                <view class="topRow"><text>本次赠送金额</text><text>+ {{givingMoney}}元</text></view>
+                <view class="topRow"><text>本次账户消费</text><text>- {{prepayMoney}}元</text></view>
+            </view>
+            <view class="topRow"><text>消费后账户余额</text><text style="margin-right:30rpx;">{{balance}}元</text></view>
+        </view>
+    </view>
+</view>
+<view class="goWrap" wx:if="{{merchantId!='101551164644688940'}}">
+    <view class="goText" style="top:60rpx;left:248rpx;" wx:if="{{point>0}}">{{point}}桔子给你</view>
+    <view class="goText" style="top:60rpx;left:248rpx;" wx:else>桔美好生活</view>
+    <view class="goText" style="top:120rpx;left:318rpx;" wx:if="{{point>0}}">吃喝玩乐随你~</view>
+    <view class="goText" style="top:120rpx;left:318rpx;" wx:else>集好店优惠</view>
+    <image src="/images/toExchange.jpg" class="toexchange" style="width:690rpx;height: 160rpx;border-radius:10rpx;" bindtap="goIndex">
+    </image>
+</view>
+<view class="jingxuanWrap" wx:if="{{recommendList.length>0}}">
+    <view class="titleWrap">
+        <image src="/images/res_title_wrap.png" style="width:230rpx;height:28rpx;"></image>
+        <view style="font-size: 34rpx;color: #333333;position: absolute;z-index:99;top:30rpx;left:50%;margin-left:-68rpx;">桔集精选</view>
+    </view>
+    <view class="pubu" wx:if="{{recommendList.length>0}}">
+        <view class="pubuItem">
+            <view class="cardWrap padr10">
+                <view class="card todetail" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
+                    <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                    <view class="pubuname">{{item.productName}}</view>
+                    <view class="pububox" style="margin-top:10rpx;">
+                        <view class="ex-juzi">
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</text></view>
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
+                        </view>
+                    </view>
+                    <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
+                        <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
+                        <view style="font-size: 22rpx;color: #999999;">已售{{item.soldNum}}件</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="pubuItem">
+            <view class="cardWrap padl10">
+                <view class="card todetail" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
+                    <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                    <view class="pubuname">{{item.productName}}</view>
+                    <view class="pububox" style="margin-top:10rpx;">
+                        <view class="ex-juzi">
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</text></view>
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
+                        </view>
+                    </view>
+                    <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
+                        <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
+                        <view style="font-size: 22rpx;color: #999999;">已售{{item.soldNum}}件</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="shuiyinWrap {{recommendList.length>0||showDetail?'':'ab'}}">
+    <image src="/images/juji.png" alt="" class="shuiyin" style="width:120rpx;height:40rpx;"></image>
+    <view class="phonenumber" bindtap="phoneCall">技术支持
+        <view class="phonenum">400-001-1139</view>
+    </view>
+</view>

@@ -1,0 +1,80 @@
+@import '../../app.wxss';
+.modal {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.gxbox {
+  width: 80%;
+  padding-bottom: 50rpx;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -262rpx;
+  margin-left: -40%;
+  border-radius: 10rpx;
+}
+
+.gxbox .title {
+  position: relative;
+  font-size: 15px;
+  color: #333;
+  padding: 40rpx 0;
+  text-align: center;
+}
+
+.closeModal {
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+  width:48rpx;
+  height:48rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  color: #333;
+}
+
+.gxdetail {
+  font-size: 14px;
+  line-height: 60rpx;
+  color: #666;
+  padding: 0 40rpx;
+}
+
+.gxboxBtnWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+}
+
+.gxboxBtn {
+  width: 280rpx;
+  height: 80rpx;
+  background-image: linear-gradient(-180deg, #b45fff 4%, #9649fa 99%);
+  box-shadow: 0 0 2px 1px #dcb9fb;
+  border-radius: 40rpx;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 80rpx;
+}
+.icon_close {
+  width: 24rpx;
+  height: 24rpx;
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+}
+.focusSuccess {
+  font-size: 14px;
+  color: #333;
+}

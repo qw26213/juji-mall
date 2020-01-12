@@ -1,0 +1,113 @@
+<view class="yongkaxuzhi-wrap" style="{{resData.activityStatus=='STARTED'&&resData.activityType=='BARGAIN'?'margin-top:16rpx':''}}">
+    <view class="yongkaxuzhi">
+        <view class="conTitle">购买须知</view>
+        <view style="background: #FBFBFB;border-radius: 10px;padding:30rpx 30rpx 10rpx 30rpx;margin-top:30rpx;">
+            <view style="margin-bottom: 20rpx;" wx:for="{{note}}" wx:key="{{index}}">
+                <view style="display:flex;align-items:center;" wx:if="{{item.title}}">
+                    <view style="width:8rpx;height:8rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
+                    <view style="font-size: 28rpx;color: #999999;">{{item.title}}</view>
+                </view>
+                <view wx:for="{{item.content}}" wx:for-index="idx" wx:for-item="it" wx:key="{{idx}}" style="display:flex;align-items:flex-start;margin-top:10rpx;">
+                    <view style="width:8rpx;height:8rpx;border-radius:50%;background: #999999;margin-right:20rpx;margin-top:12rpx;"></view>
+                    <view style="font-size: 24rpx;color: #333333;width:98%;">{{it}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+    <view class="yongkaxuzhi">
+        <view class="conTitle">门店信息</view>
+        <view class="ub ub-ac ub-pj" style="margin-top:30rpx;">
+            <view style="font-size: 28rpx;color:#333333;">{{resData.product.store.name}}</view>
+            <view class="ub ub-ac" bindtap="toMerchantsList">
+                <view style="font-size: 24rpx;color: #999999;">适用{{resData.product.product.nearStoreCount?resData.product.product.nearStoreCount:0}}家门店</view>
+                <image style="width:14rpx;height:26rpx;margin-left:20rpx;" src="/images/arrow-right.png"></image>
+            </view>
+        </view>
+        <view class="line" style="margin-top:30rpx;"></view>
+        <view class="ub ub-ac ub-pj" style="margin-top:26rpx;">
+            <view class="ub ub-ac" bindtap="toMap">
+                <image style="width:20rpx;height:23rpx;margin-right:10rpx;" src="/images/position.png"></image>
+                <view style="font-size: 24rpx;color: #666666;">{{resData.product.store.address}}</view>
+            </view>
+            <image bindtap="call" style="width:30rpx;height:30rpx;" src="/images/call.png"></image>
+        </view>
+    </view>
+</view>
+<view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{resData.product.commentCount>0}}">
+    <view class="yongkaxuzhi ub ub-ac ub-pj">
+        <view class="conTitle">走心评价({{resData.product.commentCount}})</view>
+        <view class="ub ub-ac" bindtap="toCommentList" wx:if="{{commentCount>2}}">
+            <view style="font-size:24rpx;color:#999999;">查看全部</view>
+            <image style="margin-left:20rpx;width:14rpx;height:26rpx;" src="/images/arrow-right.png"></image>
+        </view>
+    </view>
+    <view class="item" wx:for="{{resData.product.commentList}}" wx:key="{{index}}">
+        <view class="nickMsg ub ub-ac">
+            <image class="userImg" src="{{item.avatar?item.avatar:''}}"></image>
+            <view class="nickname">{{item.nickName}}</view>
+            <view class="ub ub-f1 ub-ac ml10">
+                <image class="icon_ping" src="/images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
+                <image class="icon_ping" src="/images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>
+            </view>
+            <view class="times" hidden="{{true}}">{{item.dateCreated}}</view>
+        </view>
+        <view class="content">{{item.content}}</view>
+        <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
+            <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" class="commentPic" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
+        </view>
+    </view>
+</view>
+<view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+    <view class="yongkaxuzhi">
+        <view class="conTitle">详细信息</view>
+        <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
+            <view wx:if="item.content.length>0" wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" style="font-size: 26rpx;line-height:40rpx;color: #333;margin-top:30rpx;">{{item2}}</view>
+            <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;margin-top:30rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" bindload="desImgLoad" lazy-load="true"></image>
+        </view>
+    </view>
+</view>
+<view class="yongkaxuzhi-wrap" style="margin-top:20rpx;background:#fff;padding: 30rpx 20rpx;" wx:if="{{resData.product.recommendList.length>0}}">
+    <view class="conTitle">同店推荐</view>
+    <view class="pubu">
+        <view class="pubuItem">
+            <view class="cardWrap padr10">
+                <view class="card" wx:for="{{resData.product.recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
+                    <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="widthFix" class="plimg"></image>
+                    <view class="pubuname">{{item.productName}}</view>
+                    <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
+                        <view class="ex-juzi">
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</text></view>
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
+                        </view>
+                        <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
+                            <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
+                            已售{{item.soldNum}}件
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="pubuItem">
+            <view class="cardWrap padl10">
+                <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
+                    <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="widthFix" class="plimg"></image>
+                    <view class="pubuname">{{item.productName}}</view>
+                    <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
+                        <view class="ex-juzi">
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</text></view>
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
+                        </view>
+                        <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
+                            <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
+                            已售{{item.soldNum}}件
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

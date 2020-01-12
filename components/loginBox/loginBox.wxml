@@ -1,0 +1,12 @@
+
+  <view class="modal" hidden="{{loginStatus}}" catchtap="catchModalTap">
+    <view class="gxbox">
+      <view class="title">
+        请授权登录
+      </view>
+      <view class="focusSuccess ub ub-pc">您必须授权登录才能继续以后的操作</view>
+      <view class="gxboxBtnWrap">
+        <button open-type="getUserInfo" bindgetuserinfo="getLoginInfo" lang="zh_CN" class="ub ub-ac ub-pc gxboxBtn">微信登录</button>
+      </view>
+    </view>
+  </view>

@@ -1,0 +1,67 @@
+<wxs src="../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="fullScreen ub ub-ver">
+    <view class="tablist">
+        <view class="tablist ub ub-ac ub-pj1">
+            <view wx:for="{{tablist}}" wx:key="unique" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-type="{{index}}" data-index="{{index}}" data-status="{{item.status}}">{{item.name}}<view class="line"></view>
+            </view>
+        </view>
+    </view>
+    <view class="main ub-f1 p10">
+        <view class="orderItem" wx:for="{{orderlist}}" wx:for-item="item" wx:key="unique">
+            <image class="expire" src="../../images/expire.png" wx:if="{{item.voucherValidEndDays&&item.voucherValidEndDays<=0}}"></image>
+            <view class="ub ub-ac ub-pj top">
+                <view class="status">{{ format.formatStatus(item.status)}}</view>
+                <!-- <view class="restTime" wx:if="{{item.status=='PAID'}}">有效期至{{item.vouchers}}</view> -->
+            </view> 
+            <view class="ub ub-ac info" bindtap="toDetail" data-id="{{item.orderId}}" data-status="{{item.status}}" wx:for="{{item.orderItemList}}" wx:for-item='it' wx:key="unique">
+                <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+                <view class="ub-f1 goodMsg">
+                    <view class="goodTit">{{format.toEllipsis(it.productName)}}</view>
+                    <view class="storeName">{{it.merchantName}}</view>
+                    <!-- 混合支付 -->
+                    <view class="goodAmount" wx:if="{{item.payType=='MIX'&&(item.status=='CREATED'||item.status=='CLOSE')}}">
+                        <text>{{it.point}}桔子</text><text>+</text><text>{{format.toFix(it.price)}}元</text><text class="origin">{{format.toFix(it.originalPrice)}}元</text>
+                    </view>
+                    <view class="goodAmount" wx:elif="{{item.payType=='MIX'}}">
+                        <text>{{it.paidPoint}}桔子</text><text>+</text><text>{{format.toFix(it.paidAmount)}}元</text><text class="origin">{{format.toFix(it.originalPrice)}}元</text>
+                    </view>
+                    <!-- 桔子支付 -->
+                    <view class="goodAmount" wx:elif="{{item.payType=='POINT'}}">
+                        <text>{{it.point}}桔子</text>
+                        <text class="origin">{{format.toFix(it.originalPrice)}}元</text>
+                    </view>
+                    <!-- 微信支付购买 -->
+                    <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'&&(item.status=='CREATED'||item.status=='CLOSE')}}"><text>{{format.toFix(it.price)}}元</text></view>
+                    <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'}}"><text>{{format.toFix(it.paidAmount)}}元</text>
+                    </view>
+                    <view class="num">{{format.toEllipsised(it.skuName)}}×{{it.num}}</view>
+                </view>
+            </view>
+            <view class="tx-r total" wx:if="{{item.status=='CREATED'||item.status=='CLOSE'}}">
+              合计：<text wx:if="{{item.amount>0}}">{{format.toFix(item.amount)}}元</text>
+              <text wx:if="{{item.point>0&&item.amount>0}}">+</text>
+              <text wx:if="{{item.point>0}}">{{item.point}}桔子</text>
+            </view>
+            <view class="tx-r total" wx:else >
+              合计：<text wx:if="{{item.paidAmount>0}}">{{format.toFix(item.paidAmount)}}元</text>
+              <text wx:if="{{item.paidPoint>0&&item.paidAmount>0}}">+</text>
+              <text wx:if="{{item.paidPoint>0}}">{{item.paidPoint}}桔子</text>
+            </view>
+            <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.status=='PAID'||item.status=='CREATED'||item.status=='CONSUME'}}">
+                <view wx:if="{{item.status=='PAID'}}" class="left">您已成功付款，请到店展示消费码消费</view>
+                <view wx:if="{{item.status=='CREATED'}}" class="left">请在下单后5分钟内付款，超时将自动关闭</view>
+                <view wx:if="{{item.status=='CONSUME'}}" class="left">您已成功消费，老铁给个评价再走呗～</view>
+                <view wx:if="{{item.status=='CREATED'}}" class="pay" bindtap="toPay" data-id="{{item.orderId}}" data-pre="{{item.preOrderStr}}">立即付款</view>
+                <view wx:if="{{item.status=='CONSUME'}}" class="right" bindtap="toComment" data-id="{{item.orderId}}" data-pid="{{item.orderItemList[0].productId}}">立即评价</view>
+            </view>
+        </view>
+        <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
+            <image class="nodataImg" src="../../images/null2.png"></image>
+            <view class="nodataTxt">
+              <view>您还没有相关的订单</view>
+              <view style="font-size:24rpx;color:#999;margin-top:20rpx;" bindtap="toIndex">去首页逛逛吧</view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,120 @@
+<wxs module="filter" src="../../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="container" wx:if="{{isShowData}}">
+  <view class="swiper-wrap">
+      <swiper class="img-wrap" autoplay="true" interval="3000">
+          <block wx:for="{{showPics}}" wx:key="{{index}}">
+              <swiper-item>
+                  <image mode="aspectFill" src="{{item}}" class="slide-image" lazy-load="true" />
+              </swiper-item>
+          </block>
+      </swiper>
+  </view>
+  <!-- 活动状态 -->
+  <view class='content-box' style="width:100%">
+    <view class='title-infor'>
+      <view class='collage-infor ub ub-ac'><view class='collage-numbers'>2人团</view><text>好友拼团·人满拼团成功·人不满退款</text></view>
+      <view class='name-collage'>{{productInfo.productName}}</view>
+      <view class='price-infor clearfix'>
+        <text class='fl'>{{filter.toFix(resData.activityPrice)}}<text style="font-size:24rpx">元</text></text>
+        <text class='fl original-price'>{{filter.toFix(resData.originalPrice)}}元</text>
+        <text>已拼{{resData.participantQuantity}}件</text>
+      </view>
+      <!-- 各种情况判断  -->
+      <view class='situation-box' wx:if="{{(orderStatus == 'IN_PROGRESS') || (orderStatus == 'FAIL') || (orderStatus == 'SUCCESS')}}">
+        <!--拼团中 自己进入 或者 他人进入 -->
+        <view wx:if="{{orderStatus == 'IN_PROGRESS'}}">
+          <view class='last-time ub ub-ac ub-pc'>
+            剩余时间<child dataFromParent='{{resData.orderDigest.expirationTime}}' curTime="{{resData.timestamp}}" style="margin-left:30rpx;"></child>
+          </view>
+          <view class='head-portrait-box'>
+              <view class='head-portrait' wx:key="unique" wx:for="{{ headPortraitList }}" wx:for-index="index">
+                <image class="headImg" src='{{ item.avatar? item.avatar : portraitUrl }}'></image>
+                <image class="leaderBg" src='/images/colonel-bg.png' wx:if="{{index === 0}}"></image>
+                <view class="leaderTxt" wx:if="{{index === 0}}">团长</view>
+              </view>
+          </view>
+          <view class='text-describe'>还差{{resNum? resNum : 0}}人拼团成功</view>
+        </view>
+        <!-- 该团失败 -->
+        <view class='text-describe'  wx:if="{{orderStatus == 'FAIL'}}">该团已失败，可选择开团或参与其他团</view>
+        <!-- 他人进入 已经拼团成功 -->
+        <view class='text-describe' wx:if="{{orderStatus == 'SUCCESS' && isInitiator == 0}}">该团已成功，可选择开团或参与其他团</view>
+        <!-- 自己进入 已经拼团成功 -->
+        <view class='text-describe'  wx:if="{{orderStatus == 'SUCCESS' && isInitiator == 1}}">该团已成功，请到<text style='color:#E83221' catchtap='toMyOrderList'>我的订单</text>中查</view>
+      </view>
+    </view>
+    <!-- 正常进入 -->
+    <view class='pintuan-person' wx:if="{{ pintuanListInfor.length > 0 }}">
+      <view class='head-name'>小伙伴正在拼团，可直接参与</view>
+      <view class='detail-infor'>
+        <view class='list-box'>
+          <view class='detail-pintuan ub ub-ac' wx:key="unique" wx:for='{{pintuanListInfor}}' wx:if="{{item.resNum>0}}">
+            <view class='images-box' style="height:76rpx">
+              <image wx:for='{{item.picArr}}' wx:key="unique" wx:for-item="picArr" src='{{picArr? picArr : portraitUrl}}'></image>
+            </view>
+            <text class='text-infor'>还差{{item.resNum}}人拼团成功</text>
+            <text data-activityorderid='{{item.activityOrderId}}' data-activityid='{{item.activityId}}' class='btn-cantuan' data-productid="{{item.productId}}" catchtap='joinElseCollage'>去参团</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <activityDetail resData="{{resData}}" activityId="{{activityId}}" productId="{{productId}}" note="{{note}}" style="width:100%"></activityDetail>
+
+  <view class="footer">
+      <view class="homeWrap" bindtap="gohomepage">
+          <image src="/images/shouye.png" style="width:40rpx;height:40rpx;"></image>
+      </view>
+      <button class="homeWrap toBg" open-type='share'>
+          <image src="/images/fenxiang.png" style="width:40rpx;height:40rpx;"></image>
+      </button>
+      <view style='width: 470rpx; height: 90rpx;'>
+        <form bindsubmit="collectFormIds" report-submit="true">
+        <view class='group-buying btns' wx:if="{{orderStatus == ''&& orderStock > 0}}" catchtap='createCollage'>一键开团</view>
+        <view class='group-buying btns' wx:if="{{orderStatus == 'SUCCESS' && isInitiator == 1}}" catchtap='toOrderDetail'>去使用</view>
+        <!-- 1、进入 库存不足 拼团失败 2、拼团成功，进入库存不足  无论自己或者他人-->
+        <view class='low-stocks btns' wx:if="{{(orderStatus == ''||orderStatus == 'FAIL'||orderStatus == 'SUCCESS') && orderStock == 0}}">库存不足，可选择参团</view>
+        <!-- 他人进入 已经拼团成功  -->
+        <view class='group-buying btns' wx:if="{{orderStatus == 'SUCCESS' && isInitiator == 0}}"  data-productid="{{productInfo.productId}}" catchtap='createCollage'>我来开这个团</view>
+        <!-- 自己进入，已经拼团失败 重新开团 -->
+        <view class='group-buying btns' wx:if="{{ orderStatus == 'FAIL' && isInitiator == 1 }}"  data-productid="{{productInfo.productId}}" catchtap='createCollage'>重新开这个团</view>
+        <!-- 拼团中  自己进入 -->
+        <button class="btns group-buying" open-type="share" data-type="1" wx:if="{{ orderStatus == 'IN_PROGRESS' && isInitiator == 1 }}">邀请好友拼团</button>
+        <!-- 拼团中 他人进入 -->
+        <view class='group-buying btns' wx:if="{{resData.activityStatus == 'ENDED' && orderStock > 0 && isInitiator == 0}}" catchtap='joinCollage'>一键参团</view>
+        <view class="proBtns ub ub-ac" wx:if="{{resData.activityStatus != 'ENDED'&& orderStatus == 'IN_PROGRESS' && isInitiator == 0 }}"> 
+          <view class="kaituan btns-pro ub-f1 ub ub-ver ub-ac ub-pc l" catchtap='createCollage'>
+            <text class="txt1">我要开团</text>
+          </view>
+          <view wx:if="{{resData.orderDigest.orderId==''}}" class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" catchtap='joinCollage'>
+            <text class="txt1">{{filter.toFix(resData.activityPrice)}}元</text>
+            <text class="txt2">一键参团</text>
+          </view>
+          <view wx:if="{{resData.orderDigest.orderId!=''}}" class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-activityorderid='{{resData.orderDigest.activityOrderId}}' data-activityid='{{resData.activityId}}' data-productid="{{productInfo.productId}}" catchtap='joinCollage'>
+            <text class="topay">去支付</text>
+          </view>
+        </view>
+        </form>
+      </view>
+  </view>
+
+  <view class="selectWrap" hidden="{{!isShowSelect}}" bindtap="toggleSelect"></view>
+  <view class="ub ub-ver selectModal" hidden="{{!isShowSelect}}">
+      <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
+      <view class="ub ub-ac selectTit">选择规格</view>
+      <view class="selectType">
+          <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}} {{item.stock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.stock}}">{{filter.toEllipsised(item.skuName)}}</view>
+      </view>
+      <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
+          <text class="uu" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}桔子</text>
+          <text class="uu" wx:if="{{defaultSku.point>0&&defaultSku.price>0}}">+</text>
+          <text class="uu" wx:if="{{defaultSku.price>0}}">{{filter.toFix(defaultSku.price)}}元</text>
+      </view>
+      <form bindsubmit="collectFormIds" report-submit="true">
+        <button class="selectBtn" bindtap="okSelect">选好了</button>
+      </form>
+  </view>
+
+</view>

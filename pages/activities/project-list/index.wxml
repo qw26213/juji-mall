@@ -1,0 +1,45 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="juzihl-wrap">
+    <view class="fixed-button ub ub-ac" style="{{isLeft?'right:30rpx':''}}" data-type="{{sceneType}}" catchtap='toMyActivity'>
+        <block wx:if="{{sceneType == 'SPLICED'}}">
+            <view class='type-icon'>
+                <image src='/images/pintuan-icon-my.png'></image>
+            </view>
+            <text>我的拼团</text>
+        </block>
+        <block wx:else>
+            <view class='type-icon kanjia-icon'>
+                <image src='/images/kanjia-icon.png'></image>
+            </view>
+            <text>我的砍价</text>
+        </block>
+    </view>
+    <view>
+        <view class="mtitle">{{ sceneType == 'SPLICED'? '特价拼团' : '优惠砍价'}}</view>
+        <view class="subtitle">{{ sceneType == 'SPLICED'? '省着购,不如拼团购!' : '让低价好物一目了然'}}</view>
+    </view>
+    <view class="jingxuanlist" wx:for='{{ productList }}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" catchtap='checkProductDetail'>
+        <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}" mode="aspectFill"></image>
+        <!-- <view class="dis-wrap jc-sb"><view class="from">德川家望京店</view><view class="dis">距你119km</view></view> -->
+        <view class="pro-name">{{item.productName}}</view>
+        <view class="price-wrap jc-sb">
+            <view class="p-wrap">
+                <view class="now-price">{{ format.toFix(item.activityPrice) }}<text style="font-size:24rpx">元</text></view>
+                <view class="old-price">{{ format.toFix(item.originalPrice) }}元</view>
+            </view>
+        </view>
+        <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
+            <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
+                <text class="count">已{{sceneType == 'SPLICED'? '拼': '砍'}}{{item.participantQuantity}}件</text>
+            </view>
+            <button class="ctrlbtn buyBtn2">{{sceneType == 'SPLICED'? '一键开团': '发起砍价'}}</button>
+        </view>
+    </view>
+    
+    <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
+        <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
+        <view class="nodataTxt">暂无{{sceneType == 'BARGAIN'?'砍价':'拼团'}}活动</view>
+    </view>
+</view>
+<!-- <text class='had-bottom' wx:if="{{ ifBottom }}">我也是有底线哒~</text> -->

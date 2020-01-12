@@ -1,0 +1,12 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view wx:if="{{showPageLoading}}" class="pageLoading">
+  <image src="/images/pageLoading.gif" class="pageLoadingImg"></image>
+  <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
+</view>
+<view style="position:relative;" wx:else>
+  <image src="/images/logo2.png" class="logo"></image>
+  <image src="/images/sq_main.png" class="mainImg"></image>
+  <view class="title">微信授权登录</view>
+  <view class="content">授权获取公开信息 为您提供更好服务</view>
+  <button class="sq_btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权</button>
+</view>

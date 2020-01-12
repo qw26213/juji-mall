@@ -1,0 +1,126 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="wrap" style="height:{{conHeight}}px">
+  <view class="toper">
+    <view class="userInfo ub ub-ac ub-pj">
+      <view class="ub ub-ac">
+        <image wx:if="{{avatar}}" src="{{avatar}}" style="width:100rpx;height:100rpx;margin-right:30rpx;border-radius:50%;"></image>
+        <image wx:else src="/images/user.png" style="width:100rpx;height:100rpx;margin-right:30rpx;border-radius:50%;"></image>
+        <view>
+          <view style="font-size:28rpx;color:#333333;">当前桔子</view>
+          <view class="ub ub-ac" bindtap="toMyTrade">
+            <view style="font-size:54rpx;color:#333333;line-heght:54rpx;font-weight:bold">{{currentPointObj.pointBalance?currentPointObj.pointBalance:0}}</view>
+            <image src="/images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:20rpx;"></image>
+          </view>
+
+        </view>
+      </view>
+      <view class="juziRule" bindtap="toggleModal">桔子规则</view>
+    </view>
+    <image src="/images/bgy.png" class="bgy"></image>
+    <view class="ub ub-ac ub-pj1 taskCounts">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="showDesModal" data-mt="3">
+        <view class="qd-title" style="font-weight:bold">{{currentPointObj.todayTask?currentPointObj.todayTask:0}}</view>
+        <view class="qd-text">今日完成任务</view>
+      </view>
+      <view class="vline"></view>
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="showDesModal" data-mt="1">
+        <view class="qd-title" style="font-weight:bold">{{currentPointObj.todayPoint?currentPointObj.todayPoint:0}}</view>
+        <view class="qd-text">今日获得桔子</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="pointDiv">
+    <view class="qtitle ub ub-ac">签到有礼</view>
+    <view style="overflow:hidden;">
+
+      <view class="point-text-wrap ub ub-ac ub-pj">
+        <view class="point-text">{{currentPointObj.signInList[0].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[1].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[2].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[3].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[4].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[5].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[6].awardNum}}桔子</view>
+      </view>
+
+      <view class="point-wrap ub ub-ac ub-pj">
+        <image class="point" hidden="{{!currentPointObj.signInList[0].signInStatus}}" src="/images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[0].signInStatus}}" src="/images/wqd.png"></image>
+        <view class="pline"></view>
+        <image class="point" hidden="{{!currentPointObj.signInList[1].signInStatus}}" src="/images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[1].signInStatus}}" src="/images/wqd.png"></image>
+        <view class="pline"></view>
+        <image class="point" hidden="{{!currentPointObj.signInList[2].signInStatus}}" src="/images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[2].signInStatus}}" src="/images/wqd.png"></image>
+        <view class="pline"></view>
+        <image class="point" hidden="{{!currentPointObj.signInList[3].signInStatus}}" src="/images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[3].signInStatus}}" src="/images/wqd.png"></image>
+        <view class="pline"></view>
+        <image class="point" hidden="{{!currentPointObj.signInList[4].signInStatus}}" src="/images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[4].signInStatus}}" src="/images/wqd.png"></image>
+        <view class="pline"></view>
+        <image class="point" hidden="{{!currentPointObj.signInList[5].signInStatus}}" src="/images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[5].signInStatus}}" src="/images/wqd.png"></image>
+        <view class="pline"></view>
+        <image class="point" hidden="{{!currentPointObj.signInList[6].signInStatus}}" src="/images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[6].signInStatus}}" src="/images/wqd.png"></image>
+      </view>
+      <view class="pointStatus">连续签到<text style="color: #CE463F;">{{currentPointObj.signInDays}}</text>天</view>
+      <view style="font-size: 24rpx;color: #666666;text-align:center;margin-top:20rpx;">连续签到一周可得{{currentPointObj.signInMax}}个桔子</view>
+      <form bindsubmit="signIn" report-submit="true" >
+          <button form-type="submit" class="normalBtn" hidden="{{!canSignIn}}" style="margin:30rpx auto 0;">签到</button>
+          <button class="signedBtn" hidden="{{canSignIn}}" style="margin:30rpx auto 0;">已签到</button>
+      </form>
+    </view>
+  </view>
+
+  <view class="taskDiv">
+      <view class="qtitle ub ub-ac" style="padding-left:20rpx">做任务赚桔子</view>
+      <view class="ub ub-ac mt15">
+        <button class="taskItem ub-f1 ub ub-ver ub-ac ub-pc" open-type="share">
+            <image src="/images/task0.png" class="subImg"></image>
+            <view class="subTxt">邀请新人</view>
+        </button>
+        <button class="taskItem ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toMyOrder">
+            <image src="/images/task1.png" class="subImg"></image>
+            <view class="subTxt">消费评价</view>
+        </button>
+        <button class="taskItem ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toIndex">
+            <image src="/images/task2.png" class="subImg"></image>
+            <view class="subTxt">共享好物</view>
+        </button>
+        <button class="taskItem ub-f1 ub ub-ver ub-ac ub-pc" open-type="share">
+            <image src="/images/task3.png" class="subImg"></image>
+            <view class="subTxt">推荐桔集</view>
+        </button>
+      </view>
+  </view>
+
+  <view class="juzigzWrap" hidden="{{!showjuzigz}}" bindtap="toggleModal">
+    <view class="juzigz">
+      <view style="font-size: 30rpx;color: #333333;padding:40rpx 30rpx;font-weight:bold;">桔子规则</view>
+      <view style="padding: 0 30rpx;">
+        <view style="display:flex;align-items:center;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
+          <view style="font-size: 28rpx;color: #666666;">桔子消耗规则</view>
+        </view>
+        <view style="display:flex;align-items:center;margin-top:10rpx;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;"></view>
+          <view style="font-size: 24rpx;color: #999999;">最早获得的桔子最先消耗</view>
+        </view>
+        <view style="display:flex;align-items:center;margin-top:10rpx;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
+          <view style="font-size: 28rpx;color: #666666;">每月到期规则</view>
+        </view>
+        <view style="display:flex;align-items:flex-start;margin-top:10rpx;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;margin-top:10rpx;"></view>
+          <view style="width:90%;font-size: 24rpx;color: #999999;">每个月的月底自动消除上一年份同期当月获得且未消耗的桔子，例如2019年1月31自动消除2018年1月获得且未消耗的桔子。
+          </view>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view style="position:absolute;bottom:0;left:0;width:100%;height:94rpx;display:flex;align-items:center;justify-content:center;font-size: 30rpx;color: #333333;" bindtap="closejuzigzModal">确定</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,41 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="fullScreen ub ub-ver">
+    <view class="tablist">
+        <view class="tablist ub ub-ac ub-pj1">
+            <view wx:for="{{tablist}}" wx:key="item" wx:for-index="index" bindtap="switchTab" data-index="{{index}}" data-status="{{item.status}}" class="tabItem {{index == curTabIndex? 'on' : ''}}" >{{item.name}}<view class="line"></view>
+            </view>
+        </view>
+    </view>
+    <!-- 解释说明 -->
+    <view class='explain-text-box' wx:if='{{isShowTips1&&curTabIndex==0}}'>
+      <view class='explain-text ub ub-ac'>
+        <image src='/images/close-red.png' catchtap='closeTips1'></image>
+        <view class='text-infor ub-f1'>当你邀请的桔民升级为桔长后，你可根据桔长获得的推广返利获得佣金提成，贡献金额为截止到昨天的累计贡献金额</view>
+      </view>
+    </view>
+    <view class='explain-text-box' wx:if='{{isShowTips2&&curTabIndex==1}}'>
+      <view class='explain-text ub ub-ac'>
+        <image src='/images/close-red.png' catchtap='closeTips2'></image>
+        <view class='text-infor ub-f1'>您邀请的新人为桔民，当桔民邀请10位新人后可升级为桔长贡献金额为截止到昨天的累计贡献金额</view>
+      </view>
+    </view>
+    <view class="main ub-f1 p10">
+      <view wx:if='{{userlistInfor.length != 0}}'>
+        <view class="item ub" wx:for="{{userlistInfor}}" wx:key='item'>
+          <image class="userImg udb" src="{{item.avatar? item.avatar : '/images/pinglunuser.png'}}"></image>
+          <view class="ub-f1" style="position:realtive">
+            <view class="name">{{item.nickName}}</view>
+            <view class="remark">拥有桔民：{{item.invitedMemberCount}}人</view>
+            <view class="income"><text>购物返利：{{item.saleRebate/100}}元</text><text class="r">管理佣金：{{item.manageRebate/100}}元</text></view>
+            <view class="time">受邀时间：{{item.joinedDate}}</view>
+          </view>
+        </view>
+      </view>
+      <!-- 缺省页面 -->
+      <view class="space-box" wx:else>
+        <view class="space-bg"><image src="/images/Bitmap.png"></image></view>
+        <view class="space-text">{{role == 'LEADER'? '还没有桔民升级为桔长，继续努力吧' : '还没有桔民，邀请好友加入吧'}}</view>
+      </view>
+    </view>
+</view>

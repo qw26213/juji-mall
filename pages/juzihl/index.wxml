@@ -1,0 +1,59 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view>
+  <view class="juzihl-wrap">
+    <view style="display:flex;justify-content: space-between;align-item:center;">
+      <view class="mtitle">桔子换礼</view>
+      <view class="location" bindtap="toCityList">{{locationName}}
+        <image style="width:16rpx;height:10rpx;margin-left:10rpx;" src="../../images/sort-down.png" wx:if="{{locationName}}"></image>
+      </view>
+    </view>
+    
+    <view class="subtitle" style="margin-top:10rpx;">让生活“换”然一新</view>
+    <view class="labels-wrap">
+      <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">综合</view>
+      <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">买得起</view>
+      <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">桔子
+      <image src="{{sortIndex==3?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+      </view>
+      <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">价格
+      <image src="{{sortIndex==4?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==4&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+      </view>
+      <view class="label {{sortIndex==5?'label-active':''}}" data-label="5" bindtap="toggleLabel">距离
+      <image src="{{sortIndex==5?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==5&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}"  style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+      </view>
+      <view class="label {{sortIndex==6?'label-active':''}}" data-label="6" bindtap="toggleLabel">销量
+      <image src="{{sortIndex==6?'../../images/label_xl_active.png':'../../images/label_xl.png'}}"  style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
+      </view>
+    </view>
+    <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+      <image class="productImg" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="widthFix">
+              <!-- 已售罄标识 -->
+              <view class="ysqMark" wx:if="{{!item.stock}}">
+                <image src="../../images/ysq.png"></image>
+              </view>
+      </image>
+      <view class="dis-wrap jc-sb">
+          <view class="from">{{item.merchantName}}</view>
+          <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
+        </view>
+        <view class="pro-name">{{item.productName}}</view>
+        <view class="price-wrap jc-sb">
+          <view class="p-wrap">
+            <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
+            <view class="now-price" wx:if="{{item.point>0&&item.price>0}}">+</view>
+            <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}元</view>
+            <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
+          </view>
+        </view>
+        <view class="ub ub-fe jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
+          <view class="ub ub-ac">
+            <image src="../../images/soldCount.png" style="width: 24rpx;height: 22rpx;"></image>
+            <text class="count">已售{{item.soldNum}}件</text>
+          </view>
+          <button class="buyBtn" wx:if="{{item.stock}}">购买</button>
+        </view>
+    </view> 
+
+  </view>
+</view>

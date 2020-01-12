@@ -1,0 +1,95 @@
+<wxs src="../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="main">
+    <view class="orderInfo1 p10">
+        <view class="ub ub-ac info" wx:for="{{orderInfo.orderItemList}}" wx:key="{{index}}" data-id="{{item.productId}}" bindtap="toComDetail">
+            <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+            <view class="ub-f1 ub ub-ver ub-pj goodMsg">
+                <view class="goodTit">{{format.toEllipsis(item.productName)}}</view>
+                <view class="storeName">{{format.toEllipsised(item.skuName)}}</view>
+                <!-- 混合支付 -->
+                <view class="goodAmount" wx:if="{{orderInfo.payType=='MIX'&&(orderInfo.status=='CREATED'||orderInfo.status=='CLOSE')}}">
+                    <text>{{item.point}}桔子</text><text>+</text><text>{{format.toFix(item.price)}}元</text>
+                    <text class="origin">{{format.toFix(item.originalPrice)}}元</text>
+                </view>
+                <view class="goodAmount" wx:elif="{{orderInfo.payType=='MIX'}}">
+                    <text>{{item.paidPoint}}桔子</text><text>+</text><text>{{format.toFix(item.paidAmount)}}元</text>
+                    <text class="origin">{{format.toFix(item.originalPrice)}}元</text>
+                </view>
+                <!-- 桔子支付 -->
+                <view class="goodAmount" wx:elif="{{orderInfo.payType=='POINT'}}">
+                    <text>{{item.point}}桔子</text>
+                    <text class="origin">{{format.toFix(item.originalPrice)}}元</text>
+                </view>
+                <!-- 微信支付 -->
+                <view class="goodAmount" wx:elif="{{orderInfo.payType=='WECHAT'&&(orderInfo.status=='CREATED'||orderInfo.status=='CLOSE')}}">
+                    <text>{{format.toFix(item.price)}}元</text>
+                </view>
+                <view class="goodAmount" wx:elif="{{orderInfo.payType=='WECHAT'}}">
+                    <text>{{format.toFix(item.paidAmount)}}元</text>
+                </view>
+                <view class="num">×{{item.num}}</view>
+            </view>
+        </view>
+        <view class="tx-r total" wx:if="{{orderInfo.status=='CREATED'||orderInfo.status=='CLOSE'}}">合计：<text wx:if="{{orderInfo.amount>0}}">{{format.toFix(orderInfo.amount)}}元</text><text wx:if="{{orderInfo.point>0&&orderInfo.amount>0}}">+</text><text wx:if="{{orderInfo.point>0}}">{{orderInfo.point}}桔子</text></view>
+        <view class="tx-r total" wx:else>合计：<text wx:if="{{orderInfo.paidAmount>0}}">{{format.toFix(orderInfo.paidAmount)}}元</text><text wx:if="{{orderInfo.paidPoint>0&&orderInfo.paidAmount>0}}">+</text><text wx:if="{{orderInfo.paidPoint>0}}">{{orderInfo.paidPoint}}桔子</text></view>
+    </view>
+    <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{vouchers.length>0&&orderInfo.status!='CREATED'}}">
+        <view class="status">{{format.formatStatus(orderInfo.status)}}</view>
+        <view wx:if="{{orderInfo.status=='CONSUME'}}" class="btn" bindtap="toComment" data-id="{{orderInfo.orderId}}" data-pid="{{orderInfo.orderItemList[0].productId}}">立即评价</view>
+        <view class="txt" wx:if="{{orderInfo.status=='PAID'}}">您已成功付款，请到店展示消费码消费</view>
+    </view>
+    <view class="orderInfo2" wx:if="{{vouchers.length>0&&orderInfo.status=='PAID'&&voucherInfo.validDays>=0}}">
+        <view class="barDiv">
+            <view class="tx-c" style="position:relative">{{orderInfo.vouchers[0].voucherCode}}<view class="copybtn ub ub-ac ub-pc" style="top:35rpx;" data-str="{{orderInfo.vouchers[0].voucherCode}}" bindtap="copyBtn">复制</view></view>
+            <canvas canvas-id="barcode"></canvas>
+            <view class="div ub ub ub-ac ub-pj">
+                <view class="txt">有效期至：{{validEndDate}}</view>
+                <view class="txt">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="orderInfo4" wx:if="{{vouchers.length>0&&orderInfo.status=='PAID'&&(voucherInfo.validDays<0||voucherInfo.validDays==null)}}">
+        <view wx:for="{{vouchers}}" wx:for-index="index" class="code {{item.voucherStatus=='USED'?'d':''}}" wx:key="unique">券码：{{item.voucherCode}}</view>
+        <view class="div ub ub ub-ac ub-pj">
+            <view class="txt1">已于{{validEndDate}}到期</view>
+            <view class="c">|</view>
+            <view class="txt1">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
+        </view>
+    </view>
+
+    <view class="orderInfo4" wx:if="{{vouchers.length>0&&orderInfo.status=='CONSUME'||orderInfo.status=='FINISH'}}">
+        <view class="code d" wx:for="{{vouchers}}" wx:key="unique">券码：{{item.voucherCode}}</view>
+        <view class="txt">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
+    </view>
+
+    <view class="ub ub-ac tkDiv plr15 mt10" wx:if="{{orderInfo.status=='PAID'}}">
+        <image class="udb" src="/images/tuikuan.png"></image>
+        <view class="txt ub-f1">{{orderInfo.orderBizType=='SEC_KILL'?'秒杀活动商品不支持退款':'有效期内未使用可以退款，逾期不可退款'}}</view>
+        <view wx:if="{{orderInfo.orderBizType!='SEC_KILL'}}" class="btn ub ub-ac ub-pc" bindtap="reFund">退款</view>
+    </view>
+
+    <view class="orderInfo8 plr15 mt10">
+        <view class="tit">门店信息</view>
+        <view class="txt4 ub ub-ac" style="margin-top:20rpx">
+            <view class="txt6 ub-f1">{{storeInfo.extMap.nearStore.name}}</view>
+            <view class="ub ub-ac txt5" bindtap="toMerchantsList">适用{{storeInfo.extMap.applyStoreCount}}家门店<image style="width:12rpx;height:22rpx;margin-left:10rpx;" src="../../images/arrow-right.png"></image></view>
+        </view>
+        <view class="div4 ub ub-ac" style="margin-top:20rpx">
+            <image style="width:20rpx;height:23rpx;margin-right:10rpx;" src="../../images/location1.png"></image>
+            <view class="text ub-f1" bindtap="toMap" data-lng="{{storeInfo.extMap.nearStore.lng}}" data-lat="{{storeInfo.extMap.nearStore.lat}}">{{storeInfo.extMap.nearStore.address}}</view>
+            <image style="width:30rpx;height:30rpx;" src="../../images/dianhua1.png" bindtap="callPhone" data-tel="{{storeInfo.extMap.nearStore.phone}}"></image>
+        </view>
+    </view>
+
+    <view class="orderInfo3 plr15 mt10">
+        <view class="tit">订单信息</view>
+        <view class="txt" style="position:relative">订单编号：{{orderInfo.orderId}} <view class="copybtn ub ub-ac ub-pc" data-str="{{orderInfo.orderId}}" bindtap="copyBtn">复制</view></view>
+        <view class="txt">下单时间：{{orderInfo.dateCreated}}</view>
+    </view>
+
+    <view class="btnWrap" wx:if="{{orderInfo.status=='CREATED'}}">
+        <view class="payBtn" bindtap="toPay" data-id="{{orderInfo.orderId}}">立即付款</view>
+    </view>
+</view>

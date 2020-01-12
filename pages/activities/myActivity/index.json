@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "child": "../../../components/timechange/timechange",
+    "nav-bar": "/components/navbar/index"
+  }
+}

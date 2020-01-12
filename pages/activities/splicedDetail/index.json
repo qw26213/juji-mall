@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "activityDetail": "/components/activityDetail/index",
+    "child": "../../../components/timechange/timechange",
+    "nav-bar": "/components/navbar/index"
+  }
+}

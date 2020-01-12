@@ -1,0 +1,57 @@
+<!--pages/jujiGarden/orderDetail/orderDetail.wxml-->
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class='page'>
+  <view class='head-title-box'>
+    <view class='head-title'>
+      <view class='detail-infor clearfix'>
+        <image class='fl' src='{{orderInfo.imageUrl}}'></image>
+        <view class='name-price fl'>
+          <view class='name'>{{orderInfo.productName}}</view>
+          <view class='price'>
+            <text>{{orderInfo.orderAmount}}元</text>
+            <text>管理佣金：{{orderInfo.settlementAmount}}元</text>
+          </view>
+        </view>
+      </view>
+      <view class='manage-money clearfix'>
+        <text class='fl'>共{{orderInfo.orderAmount}}件，合计{{orderInfo.orderAmount}}元</text>
+        <text class='fr'>管理佣金：{{orderInfo.settlementAmount}}元</text>
+      </view>
+       <view class='consume'>
+        已消费{{orderInfo.consumedCount}}件
+        <text class=''>，已退款{{orderInfo.refundedCount}}件</text>
+      </view>
+    </view>
+  </view>
+  <!-- 用户信息 -->
+  <view class='user-infor-box'>
+    <view class='user-title'>用户信息</view>
+    <view class='clearfix user-infor'>
+      <text class='fl'>推广桔长</text>
+      <text class='fr'>{{orderInfo.distributorName}}</text>
+    </view>
+    <view class='clearfix'>
+      <text class='fl'>购买用户</text>
+      <text class='fr'>{{orderInfo.buyerName}}</text>
+    </view>
+  </view>
+  <!-- 用户信息 -->
+  <view class='user-infor-box'>
+    <view class='user-title'>订单信息</view>
+    <view class='clearfix user-infor'>
+      <text class='fl'>订单编号</text>
+      <text class='fr'>{{orderInfo.orderNo}}</text>
+    </view>
+    <view class='clearfix user-infor'>
+      <text class='fl'>下单时间</text>
+      <text class='fr'>{{orderInfo.orderDate}}</text>
+    </view>
+     <view class='clearfix'>
+      <text class='fl'>商户名称</text>
+      <text class='fr'>{{orderInfo.merchantName}}</text>
+    </view>
+  </view>
+</view>
+<view class="juniu-bottom">
+  对此订单有疑问，请联系<text catchtap="onTelClick">桔集服务技术支持</text>
+</view> 

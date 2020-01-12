@@ -1,0 +1,37 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="main">
+  <scroll-view scroll-y style='height: 1140rpx' bindscrolltolower="scrolltolower">
+    <view class="toper ub ub-ver ub-pc plr15">
+          <view class="remark1">累计提现金额（元）</view>
+          <view class="balance">{{format.toFix(totalSettlementAmount)}}</view>
+          <view class="balancelist ub ub-ac">
+              <view class="ub-f3 ub-ver ub-ac ub-pc l"><text class="tit">提现成功</text><text class="amount">{{format.toFix(successSettlementAmount)}}</text></view>
+              <view class="line"></view>
+              <view class="ub-f4 ub-ver ub-ac ub-pc c"><text class="tit">提现失败</text><text class="amount">{{format.toFix(failSettlementAmount)}}</text></view>
+              <view class="line"></view>
+              <view class="ub-f3 ub-ver ub-ac ub-pc r"><text class="tit">处理中</text><text class="amount">{{format.toFix(processingSettlementAmount)}}</text></view>
+          </view>
+          <view class="remark2 ub ub-ac">
+            <image src='/images/alert-warning.png'></image>
+            <text>提现金额自动提现到微信零钱</text>
+          </view>
+      </view>
+      <view class="content">
+          <view class="item ub ub-ac" hidden="{{isShowNodata}}" wx:for="{{ recordlist }}" wx:key="item" bindtap="toPage"  data-transferid='{{item.transferId}}'>
+              <image class="leftBg" src="/images/leftBg.png" mode="scaleToFill"></image>
+              <view class="ub-f1">
+                  <view class="amount">+{{ format.toFix(item.amount) }}</view>
+                  <view class="time">{{ item.date }}</view>
+              </view>
+              <view class="status {{item.status == 'PROCESSING'? 'process': item.status == 'CLOSED'? 'fail': ''}}">{{ item.statusText }}</view>
+              <image src="../../../images/arrow-r.png" class="arrow-r"></image>
+          </view>
+          <view hidden="{{!isShowNodata}}" class="nodataDiv ub ub-ver ub-ac ub-pc" style="height:600rpx;">
+              <image class="nodataImg" src="../../../images/null3.png" style="width:200rpx;height:137rpx"></image>
+              <view class="nodataTxt">暂无明细</view>
+          </view>
+      </view>
+
+  </scroll-view>
+</view>

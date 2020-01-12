@@ -1,0 +1,6 @@
+{
+	"navigationBarBackgroundColor": "#FFDC00",
+	"usingComponents": {
+		"nav-bar": "/components/navbar/index"
+	}
+}

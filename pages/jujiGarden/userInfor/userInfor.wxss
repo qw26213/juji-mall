@@ -1,0 +1,61 @@
+/* pages/jujiGarden/userInfor/userInfor.wxss */
+
+.page {
+  padding: 30rpx;
+}
+
+.list-box {
+  width: 100%;
+  height: 100%;
+}
+
+.list-box .list {
+  width: 690rpx;
+  height: 238rpx;
+  background: #fff;
+  box-shadow: 0 0 5rpx 0 rgba(228, 228, 228, 0.50);
+  border-radius: 10rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #999;
+  letter-spacing: 0;
+  position: relative;
+  margin-bottom: 20rpx;
+}
+
+.item {
+  background-color: #fff;
+  position: relative;
+  border-radius: 8rpx;
+  overflow: hidden;
+  padding: 30rpx;
+}
+
+.userImg {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+
+.name {
+  font-size: 30rpx;
+  margin-top: 10rpx;
+  color: #333;
+  font-family: PingFangSC-Regular;
+}
+
+.remark {
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  font-family: PingFangSC-Regular;
+  color: #999999;
+}
+
+.income {
+  margin-top: 42rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #666666;
+}
+

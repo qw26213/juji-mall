@@ -1,0 +1,33 @@
+<wxs src="../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="main">
+    <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}" hidden="{{isShowNodata}}">
+        <view class="nickMsg ub ub-ac">
+            <image class="userImg" src="{{item.avatar}}"></image>
+            <view class="nickname">{{item.nickName}}</view>
+            <view class="ub ub-f1 ub-ac ml10">
+                <image class="icon_ping" wx:for="{{format.initArr(item.score)}}" src="../../images/icon_ped.png" wx:key="unique"></image>
+                <image class="icon_ping" wx:for="{{format.initArr(5-item.score)}}" src="../../images/icon_ping.png" wx:key="unique"></image>
+            </view>
+            <view class="times">{{item.dateCreated}}</view>
+        </view>
+        <view class="content">{{item.content}}</view>
+        <view class="imglist" wx:if="{{item.imgIds.length>0}}">
+            <image wx:for="{{item.imgIds}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" src="{{it?constant.basePicUrl + it + constant.basePicFix1:''}}" bindtap="previewImage"></image>
+        </view>
+        <view class="p15 ub ub-ac info mt10" wx:for="{{item.orders.orderItemList}}" wx:for-item='it' wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}">
+            <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}/resize_220_200/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+            <view class="ub-f1 goodMsg">
+                <view class="goodTit">{{format.toEllipsis1(it.productName)}}</view>
+                <view class="storeName">{{it.merchantName}}</view>
+                <view class="goodAmount" wx:if="{{it.type=='POINT'}}">{{it.point}}桔子<text>{{format.toFix(it.originalPrice)}}元</text></view>
+                <view class="goodAmount" wx:elif="{{it.type=='PRODUCT'&&it.point!=0}}">{{it.point}}桔子+{{format.toFix(it.price)}}元<text>{{format.toFix(it.originalPrice)}}元</text></view>
+                <view class="goodAmount" wx:elif="{{it.type=='PRODUCT'&&it.point==0}}">{{format.toFix(it.price)}}元<text>{{format.toFix(it.originalPrice)}}元</text></view>
+            </view>
+        </view>
+    </view>
+    <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
+        <image class="nodataImg" src="../../images/null1.png"></image>
+        <view class="nodataTxt">评论为空~</view>
+    </view>
+</view>

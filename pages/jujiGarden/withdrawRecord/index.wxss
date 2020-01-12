@@ -1,0 +1,141 @@
+.main {
+  padding: 30rpx 30rpx 0;
+  height: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.toper {
+  height: 360rpx;
+  background-image: linear-gradient(-90deg, #fcbf0a 0%, #ffdc00 100%);
+  border-radius: 20rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 30rpx 0 rgba(255, 220, 0, 0.9);
+}
+
+.balance {
+  font-size: 60rpx;
+  color: #000;
+  text-align: left;
+  font-weight: bold;
+}
+
+.remark1 {
+  color: #333;
+  font-size: 24rpx;
+  text-align: left;
+}
+
+.balancelist {
+  width: 85%;
+  margin-top: 20rpx;
+}
+
+.balancelist view text {
+  display: block;
+}
+
+.balancelist view text.tit {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.balancelist view.l text {
+  text-align: left;
+}
+
+.balancelist view.c text {
+  text-align: center;
+}
+
+.balancelist view.line {
+  height: 50rpx;
+  width: 1rpx;
+  border-left: #666 2rpx solid;
+}
+
+.balancelist view.r text {
+  text-align: right;
+}
+
+.balancelist view text.amount {
+  font-size: 30rpx;
+  color: #333;
+  margin-top: 10rpx;
+  font-weight: bold;
+}
+
+.remark2 {
+  margin-top: 30rpx;
+  color: #333;
+  font-size: 24rpx;
+  line-height: 35rpx;
+}
+
+.remark2 image {
+  width: 24rpx;
+  height: 24rpx;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.remark2 text {
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #333;
+  margin-left: 10rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.content {
+  margin-top: 60rpx;
+  padding-bottom: 40rpx;
+}
+
+.item {
+  height: 150rpx;
+  padding: 20rpx 20rpx 35rpx 40rpx;
+  box-sizing: border-box;
+  margin-top: -20rpx;
+}
+
+.leftBg {
+  width: 28rpx;
+  height: 157rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.amount {
+  font-size: 30rpx;
+  color: 30rpx;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.status {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.arrow-r {
+  width: 12rpx;
+  height: 22rpx;
+  margin-left: 10rpx;
+}
+
+.process {
+  color: #3cc56d;
+}
+
+.fail {
+  color: #e3080f;
+}

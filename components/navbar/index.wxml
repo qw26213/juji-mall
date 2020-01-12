@@ -1,0 +1,8 @@
+<view class="navWrap ub ub-ac" style="height:45px;padding-top:{{height}}px;background:{{navbarData.isIndex==1?'#ffdc00':''}}">
+  <view bindtap="goback" class="backBtn ub ub-ac" wx:if="{{navbarData.showCapsule}}">
+    <image src="/images/back-pre.png" mode="aspectFill" class="icon_back"></image>
+  </view>
+  <view class="navTitle ub-f1" style="line-height: 45px;">{{navbarData.title}}</view>
+  <view class="backBtn" wx:if="{{navbarData.showCapsule}}"></view>
+</view>
+<view class="navHeight" style="height:{{height-20}}px"></view>

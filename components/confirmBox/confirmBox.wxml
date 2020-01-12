@@ -1,0 +1,11 @@
+<view class="modal" hidden="{{isShowConfirmModal}}" catchtap="closeByTapModal">
+    <view class="gxbox" catchtap="tapWin">
+      <view class="title">{{confirmBoxTitle}}
+        <view class="closeModal" wx:if="{{showCloseWinBtn}}" bindtap="closeConfirmModal">×</view>
+      </view>
+      <view class="focusSuccess ub ub-pc">{{confirmBoxContent}}</view>
+      <view class="gxboxBtnWrap">
+        <view class="gxboxBtn" catchtap="closeConfirmModal">{{btnTitle}}</view>
+      </view>
+    </view>
+  </view>

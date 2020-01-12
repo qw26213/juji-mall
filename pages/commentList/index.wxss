@@ -1,0 +1,11 @@
+.main{background-color:#fff;box-sizing:border-box;padding:0 30rpx;}
+.item{border-bottom:1rpx #EEEEEE solid;padding:30rpx 0;}
+.item:last-child{border:0;}
+.nickMsg{height:80rpx;}
+.nickMsg .userImg{width:60rpx;height:60rpx;border-radius:50%;}
+.nickMsg .nickname{font-size:28rpx;color:#333333;margin-left:20rpx;margin-right:20rpx;}
+.nickMsg .times{font-size:22rpx;color:#999999;}
+.content{line-height:48rpx;font-size:24rpx;text-align:justify;color:#666666}
+.imglist{margin-top:10rpx;}
+.imglist image{width:120rpx;height:120rpx;margin-right:20rpx;}
+.icon_ping{width:30rpx;height:29rpx;display:block;margin-right:10rpx;}

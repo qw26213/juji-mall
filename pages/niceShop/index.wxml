@@ -1,0 +1,39 @@
+<wxs src="../../utils/numFr.wxs" module="filter" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+ <view class="main">
+  <view class="toper">
+    <view class="mtitle">好店礼券</view>
+    <view class="subtitle">好礼送不停，来体验吧！</view>
+  </view>
+  <view class="jingxuanlist" wx:for="{{productList}}" wx:for-index='index' wx:key="unique">
+      <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+      <view class="dis-wrap jc-sb">
+          <view class="from">{{item.merchantName}}</view>
+          <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
+      </view>
+      <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
+      <view class="price-wrap jc-sb mt08">
+          <view class="p-wrap">
+              <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
+              <view class="now-text" wx:if="{{item.point>0}}">桔子</view>
+              <view class="now-text" style="font-size:28rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+              <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}</view>
+              <view class="now-text" wx:if="{{item.price>0}}">元</view>
+              <view class="proDiv ub ub-ac" wx:if="{{item.distributor}}">
+                  <view class="l">赚</view>
+                  <view class="r">￥{{filter.toFix(item.distributorSalesRebate)}}</view>
+              </view>
+              <view class="mark1" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
+              <view class="mark2" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
+              <view class="mark3" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>
+              <button class="ctrlbtn sharBtn shareB" wx:if="{{!item.currentActivityType}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+                  <image class="shareImg" mode="widthFix" src="/images/fx.png"></image>
+              </button>
+          </view>
+      </view>
+  </view>
+  <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
+      <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
+      <view class="nodataTxt">暂无相关商品</view>
+  </view>
+</view>

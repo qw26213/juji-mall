@@ -1,0 +1,34 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="search-wrap">
+    <view class="searchInput">
+        <input class="searchIn" placeholder="请输入您想查找的城市" bindinput="bindKeyInput" value="{{searchValue}}" bindconfirm="bindconfirm" />
+        <view class="searchBtn" bindtap="toSearch"></view>
+    </view>
+</view>
+<view style="padding:0 30rpx; margin-top:20rpx;" wx:if="{{!searching}}">
+    <view class="tit">当前城市</view>
+    <view class="curItem ub ub-ac ub-pc" bindtap="selectCity" data-name="{{locationName}}" data-code="{{locationCode}}" data-pcode="{{locationPcode}}">
+        <image class="icon_addr1" src="../../images/position.png"></image>{{locationName}}
+    </view>
+    <view class="tit" style="margin-top:30rpx;">热门城市</view>
+    <view class="main">
+        <view class="item ub ub-ac ub-pc" wx:for="{{citylist}}" wx:key="unique" bindtap="selectCity" data-name="{{item.locationType=='CITY'?item.locationName:item.subList[0].locationName}}" data-pcode="{{item.locationType=='PROVINCE'?item.locationCode:''}}" data-code="{{item.locationType=='CITY'?item.locationCode:item.subList[0].locationCode}}" style="width:{{imageWidth}}">
+            <view wx:if="{{item.locationType=='CITY'}}">{{item.locationName}}</view>
+            <view wx:else>{{item.subList[0].locationName}}</view>
+        </view>
+        <view class="clear"></view>
+    </view>
+</view>
+<view class="search-result" wx:if="{{searching}}">
+    <view class="main" style="margin-top:30rpx;" wx:if="{{!noRes}}">
+        <view class="item ub ub-ac ub-pc" wx:for="{{lowcitylist}}" wx:key="unique" bindtap="selectCity" data-name="{{item.locationType=='CITY'?item.locationName:item.subList[0].locationName}}" data-pcode="{{item.locationType=='PROVINCE'?item.locationCode:''}}" data-code="{{item.locationType=='CITY'?item.locationCode:item.subList[0].locationCode}}" style="width:{{imageWidth}}">
+            <view wx:if="{{item.locationType=='CITY'}}">{{item.locationName}}</view>
+            <view wx:else>{{item.subList[0].locationName}}</view>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view class="resWrap" wx:if="{{noRes}}">
+        没有找到开通服务的城市
+    </view>
+    <view class="closeSearch" bindtap="closeSearch">返回</view>
+</view>

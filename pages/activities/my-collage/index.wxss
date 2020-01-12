@@ -1,0 +1,47 @@
+page{box-sizing:border-box;height:100%;background-color:#fbfbfb}
+.orderInfo1{background-color:#fff;position:relative;overflow:hidden;margin-bottom:20rpx;padding-bottom:0!important}
+.orderInfo1 .info{padding:30rpx;background-color:#fbfbfb;border-radius:10rpx}
+.collage-num{width:76rpx;height:36rpx;background-color:#FFDB00;font-size:22rpx;color:#333333;line-height:36rpx;text-align:center;margin-top:18rpx}
+.goodImg{width:220rpx;height:200rpx;border-radius:8rpx;border:1rpx #eee solid}
+.goodMsg{margin-left:30rpx;position:relative;height:200rpx}
+.goodTit{font-size:28rpx}
+.goodAmount{font-size:34rpx;color:#e83221;font-weight:bold;position:absolute;bottom:0;left:0}
+.goodAmount text.origin{margin-left:30rpx;font-size:28rpx;color:#999;text-decoration:line-through}
+.goodMsg .num{position:absolute;bottom:0rpx;right:10rpx;color:#999;font-size:22rpx}
+.barDiv{background-color:#fbfbfb;border-radius:10rpx}
+.orderInfo3{background-color:#fff;padding-bottom:20rpx;padding-top:40rpx}
+.orderInfo3 .tit{line-height:50rpx;color:#333;font-size:30rpx;font-weight:bold;margin-bottom:30rpx}
+.orderInfo3 .txt{line-height:50rpx;font-size:28rpx;color:#999;margin-bottom:20rpx}
+.orderInfo3 .btn{width:70rpx;height:40rpx;border:#999 1rpx solid;border-radius:4rpx;font-size:22rpx;color:#333;position:absolute;top:0;right:20rpx}
+.collage-box{padding:8rpx 30rpx 40rpx}
+.yongkaxuzhi-wrap{width:100%;box-sizing:border-box;margin-top:30rpx}
+.yongkaxuzhi{background-color:#fff;width:100%;padding:34rpx 30rpx;box-sizing:border-box}
+.row{display:flex;align-items:center}
+.line{width:100%;height:1rpx;background-color:#eeeeee}
+.phone{width:30rpx;height:30rpx}
+.jc-sb{justify-content:space-between}
+.btns{text-align:center;margin-top:36rpx}
+.btns text{font-size:34rpx;display:block;width:100%;height:88rpx;line-height:88rpx;text-align:center;border-radius:44rpx}
+.success-btn,.ing-btn{background-color:#E83221;color:#fff;font-size:34rpx;display:block;width:100%;height:88rpx;line-height:88rpx;text-align:center;border-radius:44rpx}
+.fail-btn{height:86rpx;border:1rpx solid #E83221;color:#E83221}
+.title-text{text-align:center;margin-bottom:30rpx;font-size: 34rpx;}
+.situation-box{text-align:center}
+.situation-box .text-describe{font-size:30rpx;color:#333333;letter-spacing:0;margin-top:30rpx;margin-bottom:50rpx;display:block}
+.situation-box .text-describe text{color:#E83221}
+.last-time{font-size:28rpx;color:#333333;margin-bottom:30rpx}
+.last-time text{display:inline-block;background-color:#E83221;border-radius:10rpx;width:44rpx;height:40rpx;font-family:SFNSDisplay;font-size:26rpx;color:#FFFFFF;letter-spacing:0}
+.head-portrait-box{text-align:center}
+.head-portrait-box .head-portrait{display:inline-block;margin-right:40rpx;width:100rpx;height:100rpx;position:relative}
+.head-portrait-box .head-portrait:last-of-type{margin-right:0}
+.head-portrait-box .head-portrait .headImg{width:100rpx;height:100rpx;border-radius:50%;z-index: 0}
+.head-portrait-box .head-portrait .leaderBg{width:64rpx;height:28rpx;z-index: 1;position: absolute;left: 50%;bottom: 0rpx;left: 18rpx;}
+.head-portrait-box .head-portrait .leaderTxt{width:64rpx;height:28rpx;z-index: 1;font-size:18rpx;color:#fff;position: absolute;left: 18rpx;bottom: 0rpx;text-align: center;line-height: 26rpx;}
+.fail-text{font-size:30rpx;color:#999999;margin:30rpx 0 40rpx}
+
+.txtTit{height: 48rpx;position: relative;width: 350rpx;margin: 0 auto 20rpx;}
+.titbg{display: block;width: 350rpx;height: 8rpx;position: absolute;top: 20rpx;left: 0;z-index: 0;}
+.tittext{width: 100%;text-align: center;font-size: 28rpx;color: #E83221;z-index: 1;line-height: 48rpx;height: 48rpx;}
+.statusIcon{display: block;width: 34rpx;height: 34rpx;margin-right: 10rpx;}
+
+.txt11{font-size: 34rpx;}
+.ing-btn1{background-color:#ddd;color:#fff;font-size:34rpx;display:block;width:100%;height:88rpx;line-height:88rpx;text-align:center;border-radius:44rpx}

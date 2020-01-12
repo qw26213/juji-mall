@@ -1,0 +1,24 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="main ub-f1">
+  <view class="conDiv">
+    <view class="udb" wx:if="{{true}}">
+      <view class="item ub ub-ac" wx:for="{{merchantsList}}" wx:key="{{index}}">
+        <view class="ub-f1">
+          <view class="name">{{item.name}}</view>
+          <view class="ub address" bindtap="toMap" data-lng="{{item.lng}}" data-lat="{{item.lat}}" data-name="{{item.name}}" data-address="{{item.address}}">
+            <image src="/images/location.png" class="icon1"></image>
+            <view class="txt ub-f1">{{item.address}}</view>
+          </view>
+          <view class="ub phone" bindtap="callPhone" data-phone="{{item.phone}}">
+            <image src="/images/dianhua.png" class="icon2"></image>
+            <view class="txt ub-f1">{{item.phone}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>
+      <image class="nodataImg" mode="widthFix" src="../../images/null.png"></image>
+      <view class="nodataTxt">没有可适用的门店</view>
+    </view>
+  </view>
+</view>
